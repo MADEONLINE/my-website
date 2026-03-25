@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#021024">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Super Master AI Manager Vet 2026 — Brave Vet Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#021024;--blue:#2952E3;--blue2:#1A3DBF;
+  --teal:#77B1B1;--teal2:#0A454C;
+  --red:#E63946;--yellow:#FFDE00;
+  --white:#FFFFFF;--text:#E8EDF5;--dim:#7A93AE;
+  --border:rgba(255,255,255,0.07);
+  --ff-h:'Cormorant Garamond',serif;--ff-b:'DM Sans',sans-serif;--ff-m:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--text);font-family:var(--ff-b);font-size:16px;line-height:1.65;overflow-x:hidden}
+::selection{background:var(--yellow);color:var(--navy)}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+.w{max-width:1160px;margin:0 auto;padding:0 32px}
+.ws{max-width:820px;margin:0 auto;padding:0 32px}
+.ey{font-family:var(--ff-m);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow)}
+.h1{font-family:var(--ff-h);font-size:clamp(3rem,6vw,6rem);font-weight:700;line-height:1.02;letter-spacing:-.01em}
+.h2{font-family:var(--ff-h);font-size:clamp(2.2rem,3.8vw,3.6rem);font-weight:700;line-height:1.08;letter-spacing:-.01em}
+.lead{font-size:1.02rem;color:var(--dim);line-height:1.75;max-width:560px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:6px;font-family:var(--ff-b);font-weight:600;font-size:.88rem;letter-spacing:.01em;transition:all .2s;cursor:pointer}
+.btn-y{background:var(--yellow);color:var(--navy)}.btn-y:hover{background:#ffe94d;transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,222,0,.28)}
+.btn-o{border:1.5px solid var(--border);color:var(--text)}.btn-o:hover{border-color:var(--blue);background:rgba(41,82,227,.07)}
+.btn-lg{padding:17px 42px;font-size:.97rem;border-radius:8px}
+.btn-tl{background:rgba(119,177,177,.07);color:var(--teal);border:1.5px solid rgba(119,177,177,.22)}.btn-tl:hover{background:rgba(119,177,177,.16);transform:translateY(-2px)}
+.btn-bl{background:rgba(41,82,227,.09);color:var(--blue);border:1.5px solid rgba(41,82,227,.22)}.btn-bl:hover{background:rgba(41,82,227,.2);transform:translateY(-2px)}
+.btn-rd{background:rgba(230,57,70,.06);color:var(--red);border:1.5px solid rgba(230,57,70,.2)}.btn-rd:hover{background:rgba(230,57,70,.16);transform:translateY(-2px)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes drift{0%,100%{transform:translate(0,0)}33%{transform:translate(10px,-7px)}66%{transform:translate(-7px,9px)}}
+@keyframes tickscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes glow{0%,100%{box-shadow:0 0 24px rgba(41,82,227,.15)}50%{box-shadow:0 0 50px rgba(41,82,227,.42)}}
+.rv{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+.js-ready .rv{opacity:0;transform:translateY(26px)}
+.js-ready .rv.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 32px;height:62px;display:flex;align-items:center;justify-content:space-between;transition:background .3s}
+.nav.s{background:rgba(2,16,36,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--ff-h);font-weight:800;font-size:.9rem}
+.nav-logo em{color:var(--yellow);font-style:normal}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-m{padding:7px 13px;border-radius:4px;font-size:.77rem;font-weight:600;font-family:var(--ff-m);letter-spacing:.07em;transition:background .2s}
+.nav-m:hover{background:rgba(255,255,255,.06)}
+.nm1{color:var(--teal)}.nm2{color:var(--blue)}.nm3{color:var(--red)}
+.nav-sep{width:1px;height:18px;background:var(--border);margin:0 6px}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 80px;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.o1{width:580px;height:580px;background:rgba(41,82,227,.1);top:-80px;right:-60px;animation:drift 13s infinite}
+.o2{width:380px;height:380px;background:rgba(119,177,177,.07);bottom:-20px;left:-80px;animation:drift 11s -4s infinite}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,black,transparent);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;background:rgba(255,222,0,.07);border:1px solid rgba(255,222,0,.16);border-radius:100px;margin-bottom:34px;animation:fadeUp .6s both}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:var(--yellow);animation:pulse 2s infinite;flex-shrink:0}
+.hero-tag span{font-family:var(--ff-m);font-size:.65rem;letter-spacing:.14em;color:var(--yellow);text-transform:uppercase}
+.hero-t{margin-bottom:26px;animation:fadeUp .7s .07s both}
+.hero-t em{font-style:normal;color:var(--yellow)}
+.hero-sub{font-size:1.04rem;color:var(--dim);max-width:600px;line-height:1.72;margin-bottom:16px;animation:fadeUp .7s .14s both}
+.hero-sub strong{color:var(--text);font-weight:500}
+.hero-box{display:inline-block;margin-bottom:40px;padding:14px 22px;background:rgba(255,222,0,.05);border-left:3px solid var(--yellow);border-radius:0 8px 8px 0;font-size:.91rem;line-height:1.62;animation:fadeUp .7s .18s both}
+.hero-box strong{color:var(--yellow)}
+.hero-acts{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:52px;animation:fadeUp .7s .22s both}
+.hero-stats{display:flex;border:1px solid var(--border);border-radius:12px;overflow:hidden;width:fit-content;animation:fadeUp .7s .28s both}
+.hs{padding:16px 34px;text-align:center;border-right:1px solid var(--border)}
+.hs:last-child{border-right:none}
+.hs-n{font-family:var(--ff-h);font-size:1.8rem;font-weight:800;color:var(--white)}
+.hs-n sup{color:var(--yellow);font-size:.9rem}
+.hs-l{font-family:var(--ff-m);font-size:.61rem;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);margin-top:3px}
+
+/* TICKER */
+.ticker{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(255,255,255,.015);padding:12px 0;overflow:hidden}
+.tick-wrap{display:flex;gap:52px;white-space:nowrap;width:max-content;animation:tickscroll 40s linear infinite}
+.ti{font-family:var(--ff-m);font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:12px}
+.ti::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--blue);flex-shrink:0}
+
+/* SEZIONI GENERALI */
+section{padding:88px 0}
+section.alt{background:rgba(255,255,255,.016)}
+.c2{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+.c3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+
+/* ECO OVERVIEW — NEW CARD SYSTEM */
+.eco-map{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:48px}
+.eco-c{
+  position:relative;border-radius:18px;overflow:hidden;
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--border);
+  display:flex;flex-direction:column;
+  transition:transform .25s,box-shadow .25s;
+}
+.eco-c:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.eco-topbar{height:3px;width:100%}
+.eco-inner{padding:28px 26px 24px;display:flex;flex-direction:column;flex:1}
+.eco-num{font-family:var(--ff-m);font-size:.55rem;letter-spacing:.25em;color:var(--dim);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.eco-num::after{content:'';flex:1;height:1px;background:var(--border)}
+.eco-phase{font-family:var(--ff-m);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.eco-name{font-family:var(--ff-h);font-size:1.45rem;font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:5px}
+.eco-tool{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:100px;border:1px solid;font-family:var(--ff-m);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;width:fit-content}
+.eco-desc{font-size:.82rem;color:var(--dim);line-height:1.65;margin-bottom:18px}
+.eco-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.eco-tag{font-size:.7rem;padding:4px 10px;border-radius:6px;font-family:var(--ff-m);letter-spacing:.03em}
+/* journey mini-strip inside card */
+.eco-journey{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px}
+.eco-jstep{padding:10px 9px;text-align:center;border-right:1px solid var(--border)}
+.eco-jstep:last-child{border-right:none}
+.eco-jlabel{font-family:var(--ff-m);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.eco-jval{font-size:.72rem;font-weight:700;color:var(--text)}
+.eco-bottom{margin-top:auto;padding-top:18px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.eco-date-new{font-family:var(--ff-m);font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.eco-lnk{font-size:.8rem;font-weight:600;padding-bottom:2px;border-bottom:1px solid;text-decoration:none;transition:opacity .2s}
+.eco-lnk:hover{opacity:.7}
+/* progression connector */
+.eco-connector{display:none}
+.eco-foot{grid-column:1/-1;padding:20px 28px;background:linear-gradient(135deg,rgba(41,82,227,.04),rgba(255,222,0,.02));border:1px solid var(--border);border-radius:14px;text-align:center;margin-top:4px}
+.eco-foot p{font-family:var(--ff-m);font-size:.67rem;letter-spacing:.07em;color:var(--dim)}
+.eco-foot strong{color:var(--yellow)}
+.c1t{color:var(--teal)}.c2t{color:var(--blue)}.c3t{color:var(--red)}
+
+/* MODULI */
+.msep{height:2px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+.mhero{padding:88px 0 68px;position:relative;overflow:hidden}
+.mbg{position:absolute;inset:0;pointer-events:none}
+.mgrid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:46px 46px;pointer-events:none}
+.morb{position:absolute;font-family:var(--ff-h);font-size:clamp(5rem,11vw,9rem);font-weight:800;line-height:1;right:32px;top:50%;transform:translateY(-50%);pointer-events:none;user-select:none;opacity:.04}
+.mbadge{display:inline-flex;align-items:center;gap:10px;padding:7px 17px;border-radius:100px;margin-bottom:24px;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.17em;text-transform:uppercase}
+.mkw{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px}
+.mttl{font-family:var(--ff-h);font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:700;line-height:1.05;letter-spacing:-.01em;margin-bottom:13px}
+.mtl{font-family:var(--ff-h);font-size:1.05rem;font-weight:600;margin-bottom:16px}
+.mdesc{font-size:.97rem;color:var(--dim);max-width:540px;line-height:1.72;margin-bottom:30px}
+.mdate{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;font-family:var(--ff-m);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase}
+/* path strip */
+.mpath{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border:1px solid var(--border);border-radius:11px;overflow:hidden;margin-top:32px}
+.mps{padding:17px 15px;text-align:center;border-right:1px solid var(--border);position:relative}
+.mps:last-child{border-right:none}
+.mps::before{content:attr(data-n);position:absolute;top:9px;left:13px;font-family:var(--ff-m);font-size:.54rem;color:var(--dim);letter-spacing:.08em}
+.mps-t{font-family:var(--ff-h);font-size:.82rem;font-weight:700;margin-bottom:4px}
+.mps-s{font-size:.73rem;color:var(--dim);line-height:1.43}
+/* mod body */
+.mbody{padding:60px 0;border-top:1px solid var(--border)}
+.mbody.bg2{background:rgba(255,255,255,.011)}
+
+/* sessioni */
+
+.sess:last-child{border-bottom:none}
+
+.sess-d{font-size:.81rem;color:var(--dim);line-height:1.5}
+/* pretrain */
+.pt-row{display:flex;gap:13px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:flex-start}
+.pt-row:last-child{border-bottom:none}
+.pt-ic{width:30px;height:30px;flex-shrink:0;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-family:var(--ff-m);font-weight:500}
+.pt-t{font-weight:600;font-size:.84rem;color:var(--white);margin-bottom:2px}
+.pt-d{font-size:.77rem;color:var(--dim);line-height:1.44}
+/* intermod */
+
+.ir:last-child{border-bottom:none}
+
+/* output */
+
+.out-i:last-child{margin-bottom:0}
+.out-i:hover{border-color:rgba(255,255,255,.12)}
+
+/* ═══ MFLOW — NUOVO LAYOUT VERTICALE ═══ */
+.mflow{padding:0}
+.mflow-phase{padding:52px 0;border-top:1px solid var(--border)}
+.mflow-imod-end{padding:48px 0 56px;border-top:1px solid var(--border)}
+
+/* Pre-Training phase */
+.mflow-pre-label{display:flex;align-items:center;gap:10px;font-family:var(--ff-m);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:6px}
+
+/* IN AULA header doppio — Day1 + Day2 affiancati */
+.inaula-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:32px}
+.inaula-pair .inaula-hd{margin-bottom:0}
+@media(max-width:600px){.inaula-pair{grid-template-columns:1fr;gap:8px}}
+
+/* IN AULA header */
+@keyframes inaulapulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.4)}}
+.inaula-hd{display:grid;grid-template-columns:auto 1fr auto;border-radius:14px;overflow:hidden;border:1px solid var(--border);margin-bottom:32px}
+.inaula-badge-col{display:flex;align-items:center;gap:9px;padding:22px 26px;border-right:1px solid var(--border);font-family:var(--ff-m);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+.inaula-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;animation:inaulapulse 1.6s ease-in-out infinite}
+.inaula-center-col{padding:22px 28px;display:flex;align-items:center;gap:18px}
+.inaula-dayn{font-family:var(--ff-h);font-size:1.8rem;font-weight:800;line-height:1;letter-spacing:-.025em}
+.inaula-date{font-family:var(--ff-m);font-size:.66rem;letter-spacing:.05em;color:var(--dim);line-height:1.5}
+.inaula-time-col{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;padding:22px 26px;border-left:1px solid var(--border);text-align:right}
+.inaula-time-val{font-family:var(--ff-m);font-size:.88rem;font-weight:600;letter-spacing:.02em;margin-bottom:3px}
+.inaula-time-dur{font-family:var(--ff-m);font-size:.59rem;letter-spacing:.06em;color:var(--dim)}
+
+/* Module color theming for inaula-hd */
+.m1 .inaula-hd{background:rgba(119,177,177,.02);border-color:rgba(119,177,177,.2)}
+.m1 .inaula-badge-col{background:rgba(119,177,177,.07);border-color:rgba(119,177,177,.18);color:var(--teal)}
+.m1 .inaula-dot{background:var(--teal)}
+.m1 .inaula-dayn{color:var(--teal)}
+.m1 .inaula-time-val{color:var(--text)}
+
+.m2 .inaula-hd{background:rgba(41,82,227,.02);border-color:rgba(41,82,227,.2)}
+.m2 .inaula-badge-col{background:rgba(41,82,227,.08);border-color:rgba(41,82,227,.18);color:var(--blue)}
+.m2 .inaula-dot{background:var(--blue)}
+.m2 .inaula-dayn{color:var(--blue)}
+.m2 .inaula-time-val{color:var(--text)}
+
+.m3 .inaula-hd{background:rgba(230,57,70,.02);border-color:rgba(230,57,70,.2)}
+.m3 .inaula-badge-col{background:rgba(230,57,70,.08);border-color:rgba(230,57,70,.18);color:var(--red)}
+.m3 .inaula-dot{background:var(--red)}
+.m3 .inaula-dayn{color:var(--red)}
+.m3 .inaula-time-val{color:var(--text)}
+
+/* Sessions inside mflow (keep .sess but improve spacing) */
+.mflow 
+.mflow .sess:last-child{border-bottom:none}
+
+/* Output phase */
+
+@media(max-width:660px){}
+
+/* Pre-training video grid */
+.mflow-pt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:660px){.mflow-pt-grid{grid-template-columns:1fr}}
+/* M1 TEAL */
+.m1 .mbg{background:radial-gradient(ellipse 70% 80% at 70% 50%,rgba(10,69,76,.38),transparent 68%),radial-gradient(ellipse 40% 45% at 15% 80%,rgba(119,177,177,.07),transparent 60%)}
+.m1 .mgrid{mask-image:radial-gradient(ellipse 80% 65% at 60% 40%,black,transparent)}
+.m1 .mbadge{background:rgba(119,177,177,.07);border:1px solid rgba(119,177,177,.18);color:var(--teal)}
+.m1 .mkw,.m1 .mtl,.m1 .morb{color:var(--teal)}
+.m1 .mttl em{font-style:normal;color:var(--teal)}
+.m1 .mdate{background:rgba(119,177,177,.06);border:1px solid rgba(119,177,177,.16);color:var(--teal)}
+.m1 .sess-t,.m1 .imod-h,.m1 .pt-ic,.m1 .mps-t{color:var(--teal)}
+.m1 .pt-ic{background:rgba(119,177,177,.09)}
+.m1 .mps{background:rgba(119,177,177,.025)}
+.m1 .m1 .out-i:hover{border-color:rgba(119,177,177,.28)}
+.m1 
+/* M2 BLUE */
+.m2{background:rgba(41,82,227,.018)}
+.m2 .mbg{background:radial-gradient(ellipse 70% 80% at 30% 50%,rgba(41,82,227,.22),transparent 65%),radial-gradient(ellipse 35% 40% at 80% 75%,rgba(41,82,227,.06),transparent 60%)}
+.m2 .mgrid{mask-image:radial-gradient(ellipse 80% 65% at 40% 40%,black,transparent)}
+.m2 .mbadge{background:rgba(41,82,227,.09);border:1px solid rgba(41,82,227,.2);color:var(--blue)}
+.m2 .mkw,.m2 .mtl,.m2 .morb{color:var(--blue)}
+.m2 .mttl em{font-style:normal;color:var(--blue)}
+.m2 .mdate{background:rgba(41,82,227,.07);border:1px solid rgba(41,82,227,.18);color:var(--blue)}
+.m2 .sess-t,.m2 .imod-h,.m2 .pt-ic,.m2 .mps-t{color:var(--blue)}
+.m2 .pt-ic{background:rgba(41,82,227,.09)}
+.m2 .mps{background:rgba(41,82,227,.025)}
+.m2 .m2 .out-i:hover{border-color:rgba(41,82,227,.28)}
+.m2 
+/* M3 RED */
+.m3 .mbg{background:radial-gradient(ellipse 70% 80% at 70% 50%,rgba(230,57,70,.16),transparent 65%),radial-gradient(ellipse 35% 35% at 20% 20%,rgba(230,57,70,.05),transparent 60%)}
+.m3 .mgrid{mask-image:radial-gradient(ellipse 80% 65% at 60% 40%,black,transparent)}
+.m3 .mbadge{background:rgba(230,57,70,.06);border:1px solid rgba(230,57,70,.16);color:var(--red)}
+.m3 .mkw,.m3 .mtl,.m3 .morb{color:var(--red)}
+.m3 .mttl em{font-style:normal;color:var(--red)}
+.m3 .mdate{background:rgba(230,57,70,.05);border:1px solid rgba(230,57,70,.15);color:var(--red)}
+.m3 .sess-t,.m3 .imod-h,.m3 .pt-ic,.m3 .mps-t{color:var(--red)}
+.m3 .pt-ic{background:rgba(230,57,70,.09)}
+.m3 .mps{background:rgba(230,57,70,.025)}
+.m3 .m3 .out-i:hover{border-color:rgba(230,57,70,.28)}
+.m3 
+.ag-lv{display:inline-block;margin-top:5px;padding:2px 8px;border-radius:100px;font-family:var(--ff-m);font-size:.55rem;letter-spacing:.09em}
+.lv-b{background:rgba(119,177,177,.1);color:var(--teal);border:1px solid rgba(119,177,177,.15)}
+.lv-i{background:rgba(255,222,0,.08);color:var(--yellow);border:1px solid rgba(255,222,0,.15)}
+.lv-a{background:rgba(230,57,70,.08);color:var(--red);border:1px solid rgba(230,57,70,.15)}
+
+/* FOUNDER */
+.fc{padding:36px;border:1px solid var(--border);border-radius:15px;position:relative;overflow:hidden;transition:border-color .25s}
+.fc:hover{border-color:rgba(255,255,255,.13)}
+.fc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.fc-m::after{background:linear-gradient(90deg,var(--teal),transparent)}
+.fc-ma::after{background:linear-gradient(90deg,var(--blue),transparent)}
+.fc-role{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.17em;text-transform:uppercase;margin-bottom:16px}
+.fc-m .fc-role{color:var(--teal)}.fc-ma .fc-role{color:var(--blue)}
+.fc-av{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ff-h);font-size:1.3rem;font-weight:800;margin-bottom:14px;border:2px solid var(--border)}
+.fc-m .fc-av{background:rgba(119,177,177,.08);color:var(--teal)}.fc-ma .fc-av{background:rgba(41,82,227,.08);color:var(--blue)}
+.fc-name{font-family:var(--ff-h);font-size:1.25rem;font-weight:800;margin-bottom:3px}
+.fc-title{font-size:.81rem;color:var(--dim);margin-bottom:18px}
+.fc-q{font-size:.88rem;font-style:italic;color:var(--text);line-height:1.65;padding:15px 17px;background:rgba(255,255,255,.02);border-radius:9px;margin-bottom:18px;border-left:2px solid}
+.fc-m .fc-q{border-color:var(--teal)}.fc-ma .fc-q{border-color:var(--blue)}
+.fc-tags{display:flex;flex-wrap:wrap;gap:7px}
+.fc-tag{font-size:.69rem;padding:4px 10px;border:1px solid var(--border);border-radius:100px;color:var(--dim);font-family:var(--ff-m)}
+
+/* PER CHI */
+.pc{padding:26px;border:1px solid var(--border);border-radius:12px;transition:border-color .2s,background .2s}
+.pc:hover{border-color:rgba(41,82,227,.3);background:rgba(41,82,227,.03)}
+.pc-ic{width:38px;height:38px;background:rgba(41,82,227,.08);border:1px solid rgba(41,82,227,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;margin-bottom:14px}
+.pc-t{font-family:var(--ff-h);font-size:.9rem;font-weight:700;margin-bottom:6px}
+.pc-d{font-size:.81rem;color:var(--dim);line-height:1.53}
+.nonper{padding:22px 26px;border:1px solid rgba(230,57,70,.13);background:rgba(230,57,70,.02);border-radius:10px}
+.nonper-h{font-family:var(--ff-m);font-size:.59rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:11px}
+.nonper-tags{display:flex;flex-wrap:wrap;gap:7px}
+.nonper-t{font-size:.75rem;padding:5px 12px;border:1px solid rgba(230,57,70,.13);border-radius:100px;color:#f0a0a8;font-family:var(--ff-m)}
+
+/* INCLUSO */
+.inc-g{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:40px}
+.inc{display:flex;gap:10px;padding:15px;border:1px solid var(--border);border-radius:9px}
+.inc-ck{width:22px;height:22px;background:rgba(119,177,177,.1);border:1px solid rgba(119,177,177,.17);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal);font-size:.7rem;font-weight:700}
+.inc-t{font-size:.82rem;color:var(--dim);line-height:1.47}
+.inc-t strong{color:var(--text);display:block;margin-bottom:2px;font-weight:500}
+
+/* CALENDARIO */
+.cal-g{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-top:48px}
+.tl{padding-left:30px;position:relative}
+.tl::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--teal),var(--blue),var(--red))}
+.tli{position:relative;padding-bottom:30px}
+.tli:last-child{padding-bottom:0}
+.tli::before{content:'';position:absolute;left:-24px;top:6px;width:8px;height:8px;border-radius:50%;border:2px solid var(--navy)}
+.tli.t1::before{background:var(--teal)}.tli.t2::before{background:var(--blue)}.tli.t3::before{background:var(--red)}
+.tli-d{font-family:var(--ff-m);font-size:.61rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.tli.t1 .tli-d{color:var(--teal)}.tli.t2 .tli-d{color:var(--blue)}.tli.t3 .tli-d{color:var(--red)}
+.tli-t{font-family:var(--ff-h);font-size:.93rem;font-weight:700;margin-bottom:3px}
+.tli-s{font-size:.82rem;color:var(--dim);line-height:1.52}
+.cal-info{padding:26px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.013)}
+.cal-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border)}
+.cal-row:last-child{border-bottom:none}
+.cal-l{font-size:.83rem;color:var(--dim)}.cal-r{font-family:var(--ff-m);font-size:.77rem}
+.cr-y{color:var(--yellow)}.cr-t{color:var(--teal)}.cr-w{color:var(--text)}
+
+/* PRICING */
+.pr-c{border:1px solid rgba(41,82,227,.2);border-radius:18px;padding:50px 54px;position:relative;overflow:hidden;animation:glow 5s infinite}
+.pr-c::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--teal))}
+.pr-c::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 80% 15%,rgba(41,82,227,.06),transparent);pointer-events:none}
+.pr-ey{text-align:center;margin-bottom:16px}
+.pr-price{font-family:var(--ff-h);font-size:clamp(2.6rem,5vw,4rem);font-weight:800;letter-spacing:-.03em;text-align:center;margin-bottom:5px}
+.pr-price span{color:var(--yellow)}
+.pr-note{text-align:center;font-size:.84rem;color:var(--dim);margin-bottom:6px}
+.pr-iva{text-align:center;font-family:var(--ff-m);font-size:.64rem;color:var(--dim);letter-spacing:.05em;margin-bottom:32px}
+.pr-div{height:1px;background:var(--border);margin:28px 0}
+.pr-feats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:32px}
+.pf{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--dim)}
+.pf::before{content:'✓';color:var(--teal);font-weight:700;flex-shrink:0}
+.pr-cta{display:flex;flex-direction:column;align-items:center;gap:10px}
+.pr-g{font-size:.76rem;color:var(--dim)}
+.roi{margin-top:28px;padding:22px 26px;background:rgba(255,222,0,.04);border:1px solid rgba(255,222,0,.1);border-radius:10px}
+.roi-h{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px}
+.roi-t{font-size:.84rem;color:var(--dim);line-height:1.7}
+.roi-t strong{color:var(--text);font-weight:500}
+
+/* FAQ */
+.faq-i{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 0;font-size:.9rem;font-weight:500;color:var(--text);text-align:left;gap:16px;transition:color .2s}
+.faq-q:hover{color:var(--white)}
+.faq-ic{width:23px;height:23px;flex-shrink:0;border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:.95rem;transition:all .25s;line-height:1}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-ai{padding-bottom:18px;font-size:.86rem;color:var(--dim);line-height:1.7}
+.faq-ai strong{color:var(--text);font-weight:500}
+.faq-i.open .faq-ic{border-color:var(--blue);color:var(--blue);transform:rotate(45deg)}
+.faq-i.open .faq-a{max-height:600px}
+
+/* FOOTER CTA */
+.ftcta{padding:92px 0;text-align:center;border-top:1px solid var(--border);background:radial-gradient(ellipse 55% 65% at 50% 50%,rgba(41,82,227,.07),transparent)}
+.ftcta-t{font-family:var(--ff-h);font-size:clamp(2rem,3.8vw,3.3rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:18px}
+.ftcta-t span{color:var(--yellow)}
+.ftcta-s{font-size:.97rem;color:var(--dim);max-width:460px;margin:0 auto 32px;line-height:1.72}
+.ftcta-l{margin-top:22px;font-family:var(--ff-m);font-size:.63rem;letter-spacing:.09em;color:var(--dim)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:22px 0}
+.foot-in{display:flex;align-items:center;justify-content:space-between}
+.foot-br{font-family:var(--ff-h);font-weight:800;font-size:.85rem;color:var(--dim)}
+.foot-br span{color:var(--yellow)}
+.foot-cp{font-family:var(--ff-m);font-size:.65rem;color:var(--dim)}
+
+/* STICKY */
+.sbar{position:fixed;bottom:0;left:0;right:0;z-index:180;background:rgba(2,16,36,.96);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:10px 32px;display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateY(100%);transition:transform .4s ease}
+.sbar.on{transform:none}
+.sbar-t{font-size:.84rem;color:var(--dim)}
+.sbar-t strong{color:var(--white);font-weight:500}
+.sbar-r{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.sbar-sp{font-family:var(--ff-m);font-size:.65rem;letter-spacing:.1em;color:var(--yellow);animation:pulse 3s infinite}
+
+/* ═══ RESPONSIVE — MOBILE FIRST ═══ */
+
+/* Tablet largo 900px */
+@media(max-width:900px){
+  .w{padding:0 20px}
+  .ws{padding:0 20px}
+  .eco-map{grid-template-columns:1fr}
+  .eco-c{border-bottom:1px solid var(--border)}
+  .c2,.c3{grid-template-columns:1fr}
+  .inc-g{grid-template-columns:1fr 1fr}
+  .mpath{grid-template-columns:1fr 1fr}
+  .mps:nth-child(2n){border-right:none}
+  .mps:nth-child(1),.mps:nth-child(2){border-bottom:1px solid var(--border)}
+  .inaula-hd{grid-template-columns:auto 1fr}
+  .inaula-time-col{display:none}
+  .mflow-pt-grid{grid-template-columns:1fr}
+  
+}
+
+/* Tablet stretto 760px */
+@media(max-width:760px){
+  .nav-links{display:none}
+  .morb{display:none}
+  .hero-t{font-size:clamp(2rem,7vw,3rem)}
+  .hero-sub{font-size:.9rem}
+  .hero-acts{flex-direction:column;gap:10px}
+  .hero-acts .btn{width:100%;justify-content:center}
+  .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .hs{border-right:none;border-bottom:1px solid var(--border)}
+  .hs:nth-child(odd){border-right:1px solid var(--border)}
+  .hs:last-child{border-bottom:none}
+  .h1{font-size:clamp(2rem,6vw,3.5rem)}
+  .h2{font-size:clamp(1.6rem,5vw,2.4rem)}
+  .mttl{font-size:clamp(1.8rem,6vw,3rem)}
+  .mhero{padding:56px 0 44px}
+  .mbody{padding:40px 0}
+  .mflow-phase{padding:36px 0}
+  .mflow-imod-end{padding:32px 0 44px}
+  .inaula-badge-col{padding:16px 18px;font-size:.56rem}
+  .inaula-center-col{padding:16px 18px;gap:12px}
+  .inaula-dayn{font-size:1.4rem}
+  .cal-g{grid-template-columns:1fr}
+  .pr-feats{grid-template-columns:1fr}
+  .pr-c{padding:28px 20px}
+  .fc{padding:28px 24px}
+  .c3{grid-template-columns:1fr}
+}
+
+/* Mobile 480px */
+@media(max-width:480px){
+  .w{padding:0 16px}
+  .ws{padding:0 16px}
+  .hero-t{font-size:clamp(1.8rem,8vw,2.6rem);line-height:1.1}
+  .hero-sub{font-size:.86rem;line-height:1.6}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .hs-n{font-size:2rem}
+  .hs{padding:18px 14px}
+  .ticker{font-size:.65rem}
+  /* Business hook grid → colonna singola */
+  #problema .rv[style*="grid-template-columns"]{display:flex!important;flex-direction:column;gap:28px}
+  /* Journey strip → 2 colonne */
+  #ecosistema > .w > .rv[style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr 1fr!important}
+  #ecosistema > .w > .rv > div:nth-child(2){border-right:none;border-bottom:1px solid var(--border)}
+  /* Eco cards full width */
+  .eco-inner{padding:24px 20px}
+  .eco-tags{gap:5px}
+  .eco-tag{font-size:.6rem;padding:4px 9px}
+  /* Module hero */
+  .mbadge{font-size:.56rem;padding:6px 14px}
+  .mkw{font-size:.56rem}
+  .mdate{font-size:.58rem}
+  .mpath{grid-template-columns:1fr}
+  .mps{border-right:none!important;border-bottom:1px solid var(--border)}
+  /* Pre-training grid → 1 colonna */
+  .mflow-pt-grid{grid-template-columns:1fr!important}
+  /* IN AULA header compact */
+  .inaula-hd{grid-template-columns:auto 1fr}
+  .inaula-badge-col{padding:14px 14px;font-size:.52rem;letter-spacing:.12em}
+  .inaula-center-col{padding:14px 14px}
+  .inaula-dayn{font-size:1.2rem}
+  /* Workflow grids — inline styles, no class needed */
+  /* Output grid */
+  
+  /* Pricing */
+  .pr-price span{font-size:3rem}
+  .pr-price{font-size:1.2rem}
+  .pr-feats{grid-template-columns:1fr!important}
+  .pr-cta .btn{min-width:unset!important;width:100%;font-size:.85rem}
+  /* Founders */
+  .fc-av{width:52px;height:52px;font-size:1.1rem}
+  .fc-name{font-size:1.1rem}
+  /* FAQ */
+  .faq-q{font-size:.84rem;padding:14px 0}
+  /* Footer CTA */
+  .ftcta-t{font-size:clamp(1.6rem,7vw,2.4rem)}
+  .ftcta .btn{width:100%;justify-content:center}
+  /* Nav */
+  nav.nav{padding:0 16px}
+  .nav-logo{font-size:.72rem}
+  /* Sticky bar */
+  .sbar{padding:10px 16px}
+  .sbar-t{display:none}
+  /* Inc grid */
+  .inc-g{grid-template-columns:1fr!important}
+  /* Per chi */
+  .nonper-tags{gap:6px}
+  .nonper-t{font-size:.75rem}
+  /* Certification block */
+  [style*="padding:36px 40px"]{padding:24px 22px!important}
+}
+
+/* Mobile piccolo 360px */
+@media(max-width:360px){
+  .h1,.mttl{font-size:1.7rem}
+  .h2{font-size:1.5rem}
+  .hero-stats{grid-template-columns:1fr}
+  .hs:nth-child(odd){border-right:none}
+  .hs{border-bottom:1px solid var(--border)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">⬡ BRAVE VET <em>BUSINESS</em> &nbsp;<span style="font-size:.75rem;color:var(--yellow);font-weight:800;letter-spacing:.06em">SUPER MASTER</span></div>
+  <div class="nav-links">
+    <a href="#mod1" class="nav-m nm1">Modulo 1 — USARE</a>
+    <a href="#mod2" class="nav-m nm2">Modulo 2 — CONNETTERE</a>
+    <a href="#mod3" class="nav-m nm3">Modulo 3 — COSTRUIRE</a>
+    <div class="nav-sep"></div>
+    <a href="#chiefai" class="nav-m" style="color:var(--teal)">Chief AI Genius ONE</a>
+    <a href="#investimento" class="nav-m" style="color:var(--dim)">Investimento</a>
+  </div>
+  <a href="#candidatura" class="btn btn-y" style="padding:9px 20px;font-size:.8rem">Iscriviti →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb o1"></div><div class="orb o2"></div>
+  <div class="hero-grid"></div>
+  <div class="w">
+    <div class="hero-tag" style="padding:14px 30px;border-width:1.5px;border-color:rgba(255,222,0,.4);background:rgba(255,222,0,.07);gap:16px">
+      <span class="hero-dot"></span>
+      <span style="display:flex;align-items:center;gap:14px">
+        <strong style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:800;color:#FFDE00;letter-spacing:.18em;line-height:1">SUPER</strong>
+        <span style="width:1px;height:24px;background:rgba(255,222,0,.35);display:inline-block"></span>
+        <strong style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:800;color:#FFDE00;letter-spacing:.1em;line-height:1">MASTER AI MANAGER VET 2026</strong>
+        <span style="width:1px;height:24px;background:rgba(255,222,0,.35);display:inline-block"></span>
+        <span style="font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,222,0,.6)">MILANO</span>
+      </span>
+    </div>
+    <h1 class="h1 hero-t">Il percorso che trasforma<br>la tua clinica in una<br><em>clinica intelligente.</em></h1>
+    <p class="hero-sub">Tre moduli di un giorno e mezzo l'uno, in presenza, con una classe di super innovatori del settore veterinario.<br>Ogni giornata si lavora sul <strong>tuo</strong> business, sulla <strong>tua</strong> piattaforma AI, sui <strong>tuoi</strong> strumenti e sui <strong>tuoi</strong> casi reali di gestione e strategia — con <strong style="color:var(--teal)">Chief AI Genius ONE</strong> come cervello operativo della tua clinica.<br><strong>Costruirai qualcosa che nessun concorrente potrà replicare — un vantaggio competitivo che si misura in anni, non in settimane.</strong></p>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0 28px">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid rgba(255,222,0,.2);border-radius:100px;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;color:rgba(255,222,0,.7)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><polygon points="5,3 19,12 5,21" fill="currentColor"/></svg>
+        Learning on demand · Video Tutorial
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid rgba(119,177,177,.2);border-radius:100px;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;color:rgba(119,177,177,.7)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2"/></svg>
+        In presenza con il tuo ecosistema AI
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:9px;padding:9px 18px;border:2px solid var(--yellow);border-radius:100px;font-family:var(--ff-m);font-size:.68rem;letter-spacing:.12em;color:var(--yellow);background:rgba(255,222,0,.07);font-weight:700;box-shadow:0 0 18px rgba(255,222,0,.15)">
+        🇮🇹 L'unico in Italia e in Europa
+      </div>
+    </div>
+    <div class="hero-acts">
+      <a href="#candidatura" class="btn btn-y btn-lg">Iscriviti in lista d'attesa →</a>
+      <a href="#ecosistema" class="btn btn-o">Scopri i moduli ↓</a>
+    </div>
+
+    <!-- VIDEO HERO -->
+    <a href="https://www.youtube.com/watch?v=L5RtElxDlHk" target="_blank" rel="noopener" class="rv" style="display:block;margin-bottom:44px;position:relative;border:1px solid rgba(255,222,0,.3);border-radius:16px;overflow:hidden;aspect-ratio:16/6;text-decoration:none;background:#000" onmouseover="this.querySelector('.vplay-hero').style.transform='translate(-50%,-50%) scale(1.1)'" onmouseout="this.querySelector('.vplay-hero').style.transform='translate(-50%,-50%) scale(1)'">
+      <img src="https://img.youtube.com/vi/L5RtElxDlHk/maxresdefault.jpg" alt="Ti presento il Master" style="width:100%;height:100%;object-fit:cover;opacity:.82;display:block">
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(2,16,36,.75) 0%,transparent 55%)"></div>
+      <div class="vplay-hero" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:rgba(255,222,0,.9);display:flex;align-items:center;justify-content:center;transition:transform .2s;box-shadow:0 4px 32px rgba(0,0,0,.5)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><polygon points="9,7 19,12 9,17" fill="#021024"/></svg>
+      </div>
+      <div style="position:absolute;bottom:20px;left:24px">
+        <div style="font-family:var(--ff-m);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,222,0,.7);margin-bottom:5px">Video di presentazione</div>
+        <div style="font-family:var(--ff-h);font-size:1.3rem;font-weight:700;color:#fff">Ti presento il Master</div>
+      </div>
+      <div style="position:absolute;top:16px;right:16px;background:rgba(255,222,0,.12);border:1px solid rgba(255,222,0,.3);border-radius:100px;padding:5px 14px;font-family:var(--ff-m);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow)">▶ GUARDA SU YOUTUBE</div>
+    </a>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-n">3</div><div class="hs-l">Moduli in presenza</div></div>
+      <div class="hs"><div class="hs-n">12</div><div class="hs-l">Workflow pronti</div></div>
+      <div class="hs"><div class="hs-n">6</div><div class="hs-l">Agenti autonomi</div></div>
+      <div class="hs"><div class="hs-n">15<sup>★</sup></div><div class="hs-l">Posti disponibili</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker"><div class="tick-wrap">
+  <span class="ti">Chief AI Genius ONE — La piattaforma</span><span class="ti">n8n — 12 workflow pronti</span><span class="ti">Antigravity — Dipartimento R&D</span><span class="ti">6 Agenti Autonomi</span><span class="ti">In presenza con il tuo ecosistema AI</span><span class="ti">Learning on demand · Video Tutorial</span><span class="ti">Portale Clienti · App Prenotazioni · Dashboard Staff</span><span class="ti">Sessione Mentor Coach</span><span class="ti">Piano Strategico Triennale</span><span class="ti">L'unico in Italia e in Europa</span><span class="ti">Max 15 posti · Selezione</span>
+  <span class="ti">Chief AI Genius ONE — La piattaforma</span><span class="ti">n8n — 12 workflow pronti</span><span class="ti">Antigravity — Dipartimento R&D</span><span class="ti">6 Agenti Autonomi</span><span class="ti">In presenza con il tuo ecosistema AI</span><span class="ti">Learning on demand · Video Tutorial</span><span class="ti">Portale Clienti · App Prenotazioni · Dashboard Staff</span><span class="ti">Sessione Mentor Coach</span><span class="ti">Piano Strategico Triennale</span><span class="ti">L'unico in Italia e in Europa</span><span class="ti">Max 15 posti · Selezione</span>
+</div></div>
+
+<!-- BUSINESS HOOK -->
+<section id="problema" style="padding:64px 0 48px">
+  <div class="w">
+    <div class="rv" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
+      <div>
+        <div class="ey" style="margin-bottom:16px">L'unico percorso in Italia · in Europa</div>
+        <h2 class="h2" style="margin-bottom:20px">Non impari l'AI.<br>Costruisci il sistema<br>che accelera il tuo business.</h2>
+        <p style="color:var(--dim);line-height:1.76;margin-bottom:20px">Più pazienti fidelizzati. Staff che lavora meglio. KPI sotto controllo. Valore della clinica che cresce — anche in ottica di cessione o acquisizione futura.</p>
+        <p style="color:var(--dim);line-height:1.76;">Tutto questo si costruisce in tre moduli didattici in presenza a Milano. Ogni giornata lavori con il tuo ecosistema AI, sulla piattaforma <strong style="color:var(--white)">Chief AI Genius ONE</strong> — e porti a casa output reali, funzionanti, attivi.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="padding:18px 22px;border:1px solid rgba(119,177,177,.18);border-radius:12px;background:rgba(119,177,177,.03);display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:1.4rem;flex-shrink:0">📈</div>
+          <div>
+            <div style="font-weight:600;color:var(--white);margin-bottom:4px;font-size:.9rem">Più revenue, meno caos operativo</div>
+            <div style="font-size:.8rem;color:var(--dim);line-height:1.5">Workflow automatici, recall pazienti, KPI in tempo reale — il sistema lavora per te.</div>
+          </div>
+        </div>
+        <div style="padding:18px 22px;border:1px solid rgba(41,82,227,.18);border-radius:12px;background:rgba(41,82,227,.03);display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:1.4rem;flex-shrink:0">🏥</div>
+          <div>
+            <div style="font-weight:600;color:var(--white);margin-bottom:4px;font-size:.9rem">Didattica pratica, non teorica</div>
+            <div style="font-size:.8rem;color:var(--dim);line-height:1.5">In aula con il tuo ecosistema AI. Costruisci la tua clinica intelligente. Esci con strumenti già attivi.</div>
+          </div>
+        </div>
+        <div style="padding:18px 22px;border:1px solid rgba(230,57,70,.18);border-radius:12px;background:rgba(230,57,70,.03);display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:1.4rem;flex-shrink:0">🔒</div>
+          <div>
+            <div style="font-weight:600;color:var(--white);margin-bottom:4px;font-size:.9rem">Asset proprietari permanenti</div>
+            <div style="font-size:.8rem;color:var(--dim);line-height:1.5">Strumenti digitali che nessuno può copiarti. Vantaggio competitivo che si accumula negli anni.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECO OVERVIEW -->
+<section class="alt" id="ecosistema">
+  <div class="w">
+    <div class="ey rv">La struttura del percorso</div>
+    <h2 class="h2 rv d1" style="margin-top:14px">Tre moduli in presenza.<br>Sei giornate a Milano.<br>Un ecosistema che accelera il tuo business.</h2>
+    <p class="lead rv d2" style="margin-top:12px;margin-bottom:40px">Ogni modulo si costruisce dal vivo — con il tuo ecosistema AI, sulla piattaforma <strong style="color:var(--white)">Chief AI Genius ONE</strong>. Arrivi, costruisci, esci con strumenti attivi. Poi Video Tutorial on demand e una sessione con il tuo Mentor Coach ti preparano al modulo successivo.</p>
+
+    <!-- JOURNEY STRIP -->
+    <div class="rv d2" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:52px">
+      <div style="padding:20px 18px;border-right:1px solid var(--border);background:rgba(255,255,255,.01)">
+        <div style="font-family:var(--ff-m);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px">Prima</div>
+        <div style="font-size:.86rem;font-weight:700;color:var(--white);margin-bottom:4px">Pre-Training</div>
+        <div style="font-size:.74rem;color:var(--dim);line-height:1.5">Video + esercizio obbligatorio. Arrivi in aula già configurato.</div>
+      </div>
+      <div style="padding:20px 18px;border-right:1px solid var(--border);background:rgba(255,222,0,.02)">
+        <div style="font-family:var(--ff-m);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px">In presenza</div>
+        <div style="font-size:.86rem;font-weight:700;color:var(--yellow);margin-bottom:4px">Day 1 + Day 2 · Milano</div>
+        <div style="font-size:.74rem;color:var(--dim);line-height:1.5">Con il tuo computer. Sulla piattaforma Chief AI Genius ONE. Output reali e funzionanti.</div>
+      </div>
+      <div style="padding:20px 18px;border-right:1px solid var(--border);background:rgba(255,255,255,.01)">
+        <div style="font-family:var(--ff-m);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px">Dopo</div>
+        <div style="font-size:.86rem;font-weight:700;color:var(--white);margin-bottom:4px">Video Tutorial + Mentor Coach</div>
+        <div style="font-size:.74rem;color:var(--dim);line-height:1.5">Video Tutorial on demand settimanali + sessione con il tuo Mentor Coach: una video call di allineamento, preparazione e pre-training al modulo successivo..</div>
+      </div>
+      <div style="padding:20px 18px;background:rgba(255,222,0,.03)">
+        <div style="font-family:var(--ff-m);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px">Al termine</div>
+        <div style="font-size:.86rem;font-weight:700;color:var(--yellow);margin-bottom:4px">Alumni Community</div>
+        <div style="font-size:.74rem;color:var(--dim);line-height:1.5">Aggiornamenti permanenti, sessioni trimestrali e rete tra pari.</div>
+      </div>
+    </div>
+
+    <!-- MODULI CARDS -->
+    <div class="ey rv" style="margin-bottom:16px">I tre moduli della clinica intelligente</div>
+    <div class="eco-map rv d2">
+
+      <!-- ── CARD M1 ── -->
+      <div class="eco-c">
+        <div class="eco-topbar" style="background:linear-gradient(90deg,var(--teal),rgba(119,177,177,.3))"></div>
+        <div class="eco-inner">
+          <div class="eco-num c1t">01 &nbsp;/&nbsp; 03</div>
+          <div style="margin-bottom:14px">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3C10.07 3 8.5 4.57 8.5 6.5C8.5 6.73 8.53 6.95 8.57 7.17C7.58 7.51 6.86 8.44 6.86 9.55C6.86 9.87 6.93 10.18 7.05 10.46C6.14 10.95 5.5 11.93 5.5 13.07C5.5 14.22 6.15 15.2 7.07 15.69C7 15.95 6.96 16.22 6.96 16.5C6.96 18.16 8.3 19.5 9.96 19.5C10.24 19.5 10.51 19.46 10.77 19.39C11.12 20.03 11.82 20.5 12.63 20.5C13.44 20.5 14.14 20.03 14.49 19.39C14.75 19.46 15.02 19.5 15.3 19.5C16.96 19.5 18.3 18.16 18.3 16.5C18.3 16.22 18.26 15.95 18.19 15.69C19.11 15.2 19.76 14.22 19.76 13.07C19.76 11.93 19.12 10.95 18.21 10.46C18.33 10.18 18.4 9.87 18.4 9.55C18.4 8.44 17.68 7.51 16.69 7.17C16.73 6.95 16.76 6.73 16.76 6.5C16.76 4.57 15.19 3 13.26 3" stroke="#77B1B1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 3V20.5M8.57 7.17C9.3 7.63 10.1 7.9 11 7.9M16.69 7.17C15.96 7.63 15.16 7.9 14.26 7.9M7.05 10.46C7.9 10.84 8.83 11.07 9.83 11.07M18.21 10.46C17.36 10.84 16.43 11.07 15.43 11.07M7.07 15.69C7.97 15.25 9.03 15 10.14 15M18.19 15.69C17.29 15.25 16.23 15 15.12 15" stroke="#77B1B1" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="eco-phase c1t">Modulo 1 — USARE · Giugno 2026</div>
+          <div class="eco-name" style="color:var(--white)">Il cervello della<br><em style="color:var(--teal)">clinica intelligente.</em></div>
+          <div class="eco-tool c1t" style="border-color:rgba(119,177,177,.3);background:rgba(119,177,177,.06)">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--teal);display:inline-block"></span>
+            costruito con Chief AI Genius ONE
+          </div>
+          <div class="eco-bottom">
+            <div class="eco-date-new">📅 Giugno 2026</div>
+            <a href="#mod1" class="eco-lnk c1t" style="border-color:rgba(119,177,177,.4)">Scopri il Modulo 1 ↓</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CARD M2 ── -->
+      <div class="eco-c">
+        <div class="eco-topbar" style="background:linear-gradient(90deg,var(--blue),rgba(41,82,227,.3))"></div>
+        <div class="eco-inner">
+          <div class="eco-num c2t">02 &nbsp;/&nbsp; 03</div>
+          <div style="margin-bottom:14px">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="2.5" stroke="#2952E3" stroke-width="1.5"/>
+              <circle cx="4.5" cy="7" r="1.5" stroke="#2952E3" stroke-width="1.3"/>
+              <circle cx="4.5" cy="17" r="1.5" stroke="#2952E3" stroke-width="1.3"/>
+              <circle cx="19.5" cy="7" r="1.5" stroke="#2952E3" stroke-width="1.3"/>
+              <circle cx="19.5" cy="17" r="1.5" stroke="#2952E3" stroke-width="1.3"/>
+              <circle cx="12" cy="3" r="1.5" stroke="#2952E3" stroke-width="1.3"/>
+              <circle cx="12" cy="21" r="1.5" stroke="#2952E3" stroke-width="1.3"/>
+              <path d="M9.7 10.7L6 8M9.7 13.3L6 16M14.3 10.7L18 8M14.3 13.3L18 16M12 9.5V4.5M12 14.5V19.5" stroke="#2952E3" stroke-width="1.3" stroke-linecap="round"/>
+              <path d="M4.5 8.5V15.5M19.5 8.5V15.5" stroke="#2952E3" stroke-width="1" stroke-linecap="round" stroke-dasharray="1.5 1.5"/>
+            </svg>
+          </div>
+          <div class="eco-phase c2t">Modulo 2 — CONNETTERE · Settembre 2026</div>
+          <div class="eco-name" style="color:var(--white)">Il sistema nervoso della<br><em style="color:var(--blue)">clinica intelligente.</em></div>
+          <div class="eco-tool c2t" style="border-color:rgba(41,82,227,.35);background:rgba(41,82,227,.06)">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block"></span>
+            costruito con n8n
+          </div>
+          <div class="eco-bottom">
+            <div class="eco-date-new">📅 Settembre 2026</div>
+            <a href="#mod2" class="eco-lnk c2t" style="border-color:rgba(41,82,227,.4)">Scopri il Modulo 2 ↓</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CARD M3 ── -->
+      <div class="eco-c">
+        <div class="eco-topbar" style="background:linear-gradient(90deg,var(--red),rgba(230,57,70,.3))"></div>
+        <div class="eco-inner">
+          <div class="eco-num c3t">03 &nbsp;/&nbsp; 03</div>
+          <div style="margin-bottom:14px">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="2" stroke="#E63946" stroke-width="1.5"/>
+              <ellipse cx="12" cy="12" rx="9" ry="4" stroke="#E63946" stroke-width="1.4"/>
+              <ellipse cx="12" cy="12" rx="9" ry="4" stroke="#E63946" stroke-width="1.4" transform="rotate(60 12 12)"/>
+              <ellipse cx="12" cy="12" rx="9" ry="4" stroke="#E63946" stroke-width="1.4" transform="rotate(120 12 12)"/>
+            </svg>
+          </div>
+          <div class="eco-phase c3t">Modulo 3 — COSTRUIRE · Novembre 2026</div>
+          <div class="eco-name" style="color:var(--white)">Il Dipartimento R&D della<br><em style="color:var(--red)">clinica intelligente.</em></div>
+          <div class="eco-tool c3t" style="border-color:rgba(230,57,70,.35);background:rgba(230,57,70,.06)">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--red);display:inline-block"></span>
+            costruito con Antigravity
+          </div>
+          <div class="eco-bottom">
+            <div class="eco-date-new">📅 Novembre 2026</div>
+            <a href="#mod3" class="eco-lnk c3t" style="border-color:rgba(230,57,70,.4)">Scopri il Modulo 3 ↓</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="eco-foot"><p>Il cervello · il sistema nervoso · il Dipartimento R&D — i tre pilastri della clinica intelligente</p><p style="margin-top:6px"><strong>«Nel Modulo 1 costruisci il cervello. Nel Modulo 2 accendi il sistema nervoso. Nel Modulo 3 apri il Dipartimento R&D. La tua clinica intelligente è completa.»</strong></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHIEF AI GENIUS ONE — subito dopo le card moduli -->
+<section id="chiefai" style="padding:72px 0 64px">
+  <div class="w">
+
+    <!-- CTA scarica percorso completo -->
+    <div class="rv" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:52px;padding:22px 28px;border:1px solid rgba(255,222,0,.2);border-radius:14px;background:rgba(255,222,0,.02)">
+      <div>
+        <div style="font-family:var(--ff-m);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);margin-bottom:5px">Programma completo</div>
+        <div style="font-size:.92rem;font-weight:600;color:var(--white)">Tutti e tre i moduli nel dettaglio — date, contenuti, output.</div>
+      </div>
+      <a href="https://drive.google.com/uc?export=download&id=1UucDaB86tOV_zj4wCJfxic6dEvE8D1mk" style="display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border:2px solid var(--yellow);border-radius:8px;font-family:var(--ff-m);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);background:var(--yellow);font-weight:700;white-space:nowrap;transition:all .2s;box-shadow:0 0 20px rgba(255,222,0,.3)" onmouseover="this.style.background='#ffe94d';this.style.boxShadow='0 0 30px rgba(255,222,0,.5)'" onmouseout="this.style.background='var(--yellow)';this.style.boxShadow='0 0 20px rgba(255,222,0,.3)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3v13M7 12l5 5 5-5M3 20h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Scarica il corso completo
+      </a>
+    </div>
+
+    <!-- Chief AI Genius ONE -->
+    <div class="ey rv">La piattaforma del percorso</div>
+    <h2 class="h2 rv d1" style="margin-top:14px">Chief AI Genius ONE.<br><em style="font-style:normal;color:var(--teal)">Inclusa gratis per tutta la durata del Master.</em></h2>
+    <p class="lead rv d2" style="margin-top:12px;margin-bottom:28px">Non uno strumento generico. La piattaforma AI progettata per il business veterinario — configurata sulla tua clinica dal primo giorno, attiva per 6 mesi.</p>
+
+    <!-- CTA → landing dedicata Chief AI Genius ONE -->
+    <div class="rv" style="margin-bottom:36px">
+      <a href="https://chief-ai-genius-one.netlify.app/" style="display:inline-flex;align-items:center;gap:12px;padding:14px 24px;border:1.5px solid var(--teal);border-radius:10px;background:rgba(119,177,177,.06);text-decoration:none;transition:background .2s,border-color .2s;group" onmouseover="this.style.background='rgba(119,177,177,.12)';this.style.borderColor='rgba(119,177,177,.8)'" onmouseout="this.style.background='rgba(119,177,177,.06)';this.style.borderColor='var(--teal)'">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(119,177,177,.15);border:1px solid rgba(119,177,177,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#77B1B1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div style="font-family:var(--ff-h);font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:2px">Scopri tutto su Chief AI Genius ONE →</div>
+          <div style="font-family:var(--ff-m);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">La piattaforma · funzionalità · casi d'uso · demo</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- VIDEO PLACEHOLDER -->
+    <div class="rv d1" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px">
+      <a href="https://www.youtube.com/watch?v=sLsnVYYdhkg" target="_blank" rel="noopener" style="display:block;position:relative;border:1px solid rgba(119,177,177,.3);border-radius:14px;overflow:hidden;aspect-ratio:16/9;text-decoration:none;background:#000" onmouseover="this.querySelector('.vplay').style.transform='scale(1.1)'" onmouseout="this.querySelector('.vplay').style.transform='scale(1)'">
+        <img src="https://drive.google.com/thumbnail?id=1KU2qKxvc97yFSI8qcskD_MXnjxtBbila&sz=w1280" alt="Cos'è Chief AI Genius ONE" style="width:100%;height:100%;object-fit:cover;opacity:.85;display:block">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(2,16,36,.7) 0%,transparent 60%)"></div>
+        <div class="vplay" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(119,177,177,.9);display:flex;align-items:center;justify-content:center;transition:transform .2s;box-shadow:0 4px 24px rgba(0,0,0,.4)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="9,7 19,12 9,17" fill="#021024"/></svg>
+        </div>
+        <div style="position:absolute;bottom:14px;left:16px">
+          <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(119,177,177,.8);margin-bottom:3px">Video 1</div>
+          <div style="font-size:.88rem;font-weight:700;color:#fff">Cos'è Chief AI Genius ONE</div>
+        </div>
+        <div style="position:absolute;top:12px;right:12px;background:rgba(119,177,177,.15);border:1px solid rgba(119,177,177,.3);border-radius:100px;padding:3px 10px;font-family:'DM Mono',monospace;font-size:.55rem;color:var(--teal);letter-spacing:.08em">▶ GUARDA SU YOUTUBE</div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=trMxINu8pZ4" target="_blank" rel="noopener" style="display:block;position:relative;border:1px solid rgba(119,177,177,.3);border-radius:14px;overflow:hidden;aspect-ratio:16/9;text-decoration:none;background:#000" onmouseover="this.querySelector('.vplay').style.transform='scale(1.1)'" onmouseout="this.querySelector('.vplay').style.transform='scale(1)'">
+        <img src="https://drive.google.com/thumbnail?id=1m8MLxTevaorPf0eLTVl0TTJCgs_IAXhC&sz=w1280" alt="Chief AI Genius ONE in azione" style="width:100%;height:100%;object-fit:cover;opacity:.85;display:block">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(2,16,36,.7) 0%,transparent 60%)"></div>
+        <div class="vplay" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(119,177,177,.9);display:flex;align-items:center;justify-content:center;transition:transform .2s;box-shadow:0 4px 24px rgba(0,0,0,.4)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="9,7 19,12 9,17" fill="#021024"/></svg>
+        </div>
+        <div style="position:absolute;bottom:14px;left:16px">
+          <div style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(119,177,177,.8);margin-bottom:3px">Video 2</div>
+          <div style="font-size:.88rem;font-weight:700;color:#fff">Chief AI Genius ONE in azione</div>
+        </div>
+        <div style="position:absolute;top:12px;right:12px;background:rgba(119,177,177,.15);border:1px solid rgba(119,177,177,.3);border-radius:100px;padding:3px 10px;font-family:'DM Mono',monospace;font-size:.55rem;color:var(--teal);letter-spacing:.08em">▶ GUARDA SU YOUTUBE</div>
+      </a>
+    </div>
+
+    <!-- 3 vantaggi -->
+    <div class="rv d2" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+      <div style="padding:20px;border:1px solid rgba(119,177,177,.15);border-radius:12px;background:rgba(119,177,177,.03)">
+        <div style="font-size:1.3rem;margin-bottom:8px">🎁</div>
+        <div style="font-weight:700;font-size:.88rem;color:var(--white);margin-bottom:4px">Inclusa gratis · 6 mesi</div>
+        <div style="font-size:.78rem;color:var(--dim);line-height:1.5">Accesso completo per tutta la durata del Master.</div>
+      </div>
+      <div style="padding:20px;border:1px solid rgba(119,177,177,.15);border-radius:12px;background:rgba(119,177,177,.03)">
+        <div style="font-size:1.3rem;margin-bottom:8px">⚙️</div>
+        <div style="font-weight:700;font-size:.88rem;color:var(--white);margin-bottom:4px">Sulla tua clinica reale</div>
+        <div style="font-size:.78rem;color:var(--dim);line-height:1.5">Configurata sui tuoi dati, protocolli e staff dal Modulo 1.</div>
+      </div>
+      <div style="padding:20px;border:1px solid rgba(119,177,177,.15);border-radius:12px;background:rgba(119,177,177,.03)">
+        <div style="font-size:1.3rem;margin-bottom:8px">🔗</div>
+        <div style="font-weight:700;font-size:.88rem;color:var(--white);margin-bottom:4px">Cresce con i 3 moduli</div>
+        <div style="font-size:.78rem;color:var(--dim);line-height:1.5">Cervello nel M1 · sistema nervoso nel M2 · R&D nel M3.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MODULO 1 ══ -->
+<div class="msep"></div>
+<section class="m1" id="mod1" style="padding:0">
+  <div class="mhero">
+    <div class="mbg"></div><div class="mgrid"></div>
+    <div class="w" style="position:relative">
+      <div class="morb">01</div>
+      <div class="mbadge rv">Modulo 1 — USARE · Giugno 2026</div>
+      <div class="mkw rv d1">costruito con Chief AI Genius ONE</div>
+      <h2 class="h1 mttl rv d1">Il cervello della<br><em>clinica intelligente.</em></h2>
+      <p class="mtl rv d2"><strong style="color:var(--teal);font-size:1.05em">Usi già Claude. Ma lo stai usando come Google.</strong><br><br>Impari a smettere di <em>usare</em> l'AI e inizi a <em>progettarla</em>. Capisci come trasferire la tua conoscenza clinica — protocolli, casi, decisioni — a un sistema che la replica in autonomia. Impari la logica delle competenze: come scomporre un problema reale in istruzioni precise che producono risultati professionali. Esci con <strong>Chief AI Genius ONE</strong> configurato sulla tua clinica e con un metodo che userai per tutta la vita.</p>
+      <div class="rv d3" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:32px">
+        <a href="#candidatura" class="btn btn-tl btn-lg">Iscriviti in lista d'attesa →</a>
+        <a href="https://drive.google.com/uc?export=download&id=1OB0LJX14L_WK3X2SrZQmb4ElAtnGGVo4" style="display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border:2px solid var(--teal);border-radius:8px;font-family:var(--ff-m);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);background:var(--teal);font-weight:700;transition:all .2s;box-shadow:0 0 18px rgba(119,177,177,.25)" onmouseover="this.style.background='#99c8c8';this.style.boxShadow='0 0 28px rgba(119,177,177,.45)'" onmouseout="this.style.background='var(--teal)';this.style.boxShadow='0 0 18px rgba(119,177,177,.25)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3v13M7 12l5 5 5-5M3 20h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Scarica il programma del Modulo 1</a>
+        <div class="mdate">📅 Day 1: 11 Giugno · 9:00–17:30 · Day 2: 12 Giugno · 9:00–13:30</div>
+      </div>
+      <div class="mpath rv d3">
+        <div class="mps" data-n="PRIMA"><div class="mps-t">Pre-Training</div></div>
+        <div class="mps" data-n="GIORNO 1"><div class="mps-t">Day 1 — 9:00/17:30</div></div>
+        <div class="mps" data-n="GIORNO 2"><div class="mps-t">Day 2 — 9:00/13:30</div></div>
+        <div class="mps" data-n="8 SETTIMANE"><div class="mps-t">Inter-modulare 1→2</div></div>
+      </div>
+    </div>
+  </div>
+  <!-- ══ MFLOW M1 ══ -->
+  <div class="mflow">
+   <div class="w">
+
+    <!-- 2+3 · IN AULA — DAY 1 + DAY 2 accoppiati -->
+    <div class="mflow-phase rv d1">
+      <div class="inaula-pair">
+        <div class="inaula-hd">
+          <div class="inaula-badge-col"><span class="inaula-dot"></span>IN AULA</div>
+          <div class="inaula-center-col">
+            <div class="inaula-dayn">Day 1</div>
+            <div class="inaula-date">11 Giugno 2026 · Milano</div>
+          </div>
+          <div class="inaula-time-col">
+            <div class="inaula-time-val">9:00 – 17:30</div>
+            <div class="inaula-time-dur">8 ore 30 min</div>
+          </div>
+        </div>
+        <div class="inaula-hd">
+          <div class="inaula-badge-col"><span class="inaula-dot"></span>IN AULA</div>
+          <div class="inaula-center-col">
+            <div class="inaula-dayn">Day 2</div>
+            <div class="inaula-date">12 Giugno 2026 · Milano</div>
+          </div>
+          <div class="inaula-time-col">
+            <div class="inaula-time-val">9:00 – 13:30</div>
+            <div class="inaula-time-dur">4 ore 30 min</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+        <div style="padding:18px 20px;border:1px solid rgba(119,177,177,.1);border-radius:10px;background:rgba(119,177,177,.02)">
+          <div style="font-family:var(--ff-m);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px">Day 1 — le sessioni</div>
+          <div style="font-size:.86rem;color:var(--text);line-height:1.7"><span style="color:var(--teal);margin-right:6px">·</span>Il mondo che cambia e l'ecosistema che costruirete<br><span style="color:var(--teal);margin-right:6px">·</span>La logica delle competenze<br><span style="color:var(--teal);margin-right:6px">·</span>Chief AI Genius ONE — il primo protagonista in azione</div>
+        </div>
+        <div style="padding:18px 20px;border:1px solid rgba(119,177,177,.1);border-radius:10px;background:rgba(119,177,177,.02)">
+          <div style="font-family:var(--ff-m);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px">Day 2 — le sessioni</div>
+          <div style="font-size:.86rem;color:var(--text);line-height:1.7"><span style="color:var(--teal);margin-right:6px">·</span>Chief AI Genius ONE in produzione<br><span style="color:var(--teal);margin-right:6px">·</span>Casi live del gruppo<br><span style="color:var(--teal);margin-right:6px">·</span>Output individuali + Roadmap personale</div>
+        </div>
+      </div>
+      <!-- OUTPUT M1 -->
+      <div style="margin-top:16px;padding:20px 24px;border:1px solid rgba(119,177,177,.2);border-radius:12px;background:rgba(119,177,177,.04)">
+        <div style="font-family:var(--ff-m);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:14px">Cosa porti a casa</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--teal);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">Chief AI Genius ONE</strong> configurato sulla tua clinica reale — dal primo giorno, in produzione</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--teal);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">Prima competenza AI</strong> costruita con il tuo metodo — replicabile per tutta la vita</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--teal);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">Referto PDF brandizzato</strong> generato in aula sulla tua clinica</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--teal);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">Piano di salute annuale</strong> su paziente reale — 12 mesi, antiparassitari, screening razza</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--teal);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">Roadmap personale</strong> — i 3 processi da automatizzare nel Modulo 2</span></div>
+        </div>
+      </div>
+    </div>
+
+   </div>
+  </div>
+</section>
+
+<!-- ══ MODULO 2 ══ -->
+<div class="msep"></div>
+<section class="m2" id="mod2" style="padding:0">
+  <div class="mhero">
+    <div class="mbg"></div><div class="mgrid"></div>
+    <div class="w" style="position:relative">
+      <div class="morb">02</div>
+      <div class="mbadge rv">Modulo 2 — CONNETTERE · Settembre 2026</div>
+      <div class="mkw rv d1">costruito con n8n</div>
+      <h2 class="h1 mttl rv d1">Il sistema nervoso della<br><em>clinica intelligente.</em></h2>
+      <p class="mtl rv d2">Impari a leggere la tua clinica come un sistema di flussi — e a identificare dove il tempo si perde, dove le informazioni si perdono, dove le decisioni arrivano tardi. Impari la logica dell'automazione: come collegare strumenti diversi, come far scattare le azioni giuste al momento giusto, come misurare se un processo funziona davvero. Esci con <strong>12 workflow operativi</strong> e la capacità di costruirne di nuovi ogni volta che vedi un'inefficienza.</p>
+      <div class="rv d3" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:32px">
+        <a href="#candidatura" class="btn btn-bl btn-lg">Iscriviti in lista d'attesa →</a>
+        <a href="https://drive.google.com/uc?export=download&id=1m65tRGg11KcSIOs5oOs7daGjjUyJ-5ss" style="display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border:2px solid var(--blue);border-radius:8px;font-family:var(--ff-m);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--blue);font-weight:700;transition:all .2s;box-shadow:0 0 18px rgba(41,82,227,.3)" onmouseover="this.style.background='#3d63f0';this.style.boxShadow='0 0 28px rgba(41,82,227,.5)'" onmouseout="this.style.background='var(--blue)';this.style.boxShadow='0 0 18px rgba(41,82,227,.3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3v13M7 12l5 5 5-5M3 20h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Scarica il programma del Modulo 2</a>
+        <div class="mdate">📅 Day 1: 24 Settembre · 9:00–17:30 · Day 2: 25 Settembre · 9:00–13:30</div>
+      </div>
+      <div class="mpath rv d3">
+        <div class="mps" data-n="PRIMA"><div class="mps-t">Pre-Training</div></div>
+        <div class="mps" data-n="GIORNO 1"><div class="mps-t">Day 1 — 9:00/17:30</div></div>
+        <div class="mps" data-n="GIORNO 2"><div class="mps-t">Day 2 — 9:00/13:30</div></div>
+        <div class="mps" data-n="8 SETTIMANE"><div class="mps-t">Inter-modulare 2→3</div></div>
+      </div>
+    </div>
+  </div>
+  <!-- ══ MFLOW M2 ══ -->
+  <div class="mflow">
+   <div class="w">
+
+    <!-- 2+3 · IN AULA — DAY 1 + DAY 2 accoppiati -->
+    <div class="mflow-phase rv d1">
+      <div class="inaula-pair">
+        <div class="inaula-hd">
+          <div class="inaula-badge-col"><span class="inaula-dot"></span>IN AULA</div>
+          <div class="inaula-center-col">
+            <div class="inaula-dayn">Day 1</div>
+            <div class="inaula-date">24 Settembre 2026 · Milano</div>
+          </div>
+          <div class="inaula-time-col">
+            <div class="inaula-time-val">9:00 – 17:30</div>
+            <div class="inaula-time-dur">8 ore 30 min</div>
+          </div>
+        </div>
+        <div class="inaula-hd">
+          <div class="inaula-badge-col"><span class="inaula-dot"></span>IN AULA</div>
+          <div class="inaula-center-col">
+            <div class="inaula-dayn">Day 2</div>
+            <div class="inaula-date">25 Settembre 2026 · Milano</div>
+          </div>
+          <div class="inaula-time-col">
+            <div class="inaula-time-val">9:00 – 13:30</div>
+            <div class="inaula-time-dur">4 ore 30 min</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+        <div style="padding:18px 20px;border:1px solid rgba(41,82,227,.1);border-radius:10px;background:rgba(41,82,227,.02)">
+          <div style="font-family:var(--ff-m);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:10px">Day 1 — le sessioni</div>
+          <div style="font-size:.86rem;color:var(--text);line-height:1.7"><span style="color:var(--blue);margin-right:6px">·</span>Il sistema nervoso in azione — demo ecosistema<br><span style="color:var(--blue);margin-right:6px">·</span>Attivare la libreria — 12 workflow operativi<br><span style="color:var(--blue);margin-right:6px">·</span>Build live — il tuo primo workflow personalizzato</div>
+        </div>
+        <div style="padding:18px 20px;border:1px solid rgba(41,82,227,.1);border-radius:10px;background:rgba(41,82,227,.02)">
+          <div style="font-family:var(--ff-m);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:10px">Day 2 — le sessioni</div>
+          <div style="font-size:.86rem;color:var(--text);line-height:1.7"><span style="color:var(--blue);margin-right:6px">·</span>Workflow avanzati e logiche complesse<br><span style="color:var(--blue);margin-right:6px">·</span>Misurare il sistema nervoso — KPI<br><span style="color:var(--blue);margin-right:6px">·</span>Roadmap individuale + anteprima Modulo 3</div>
+        </div>
+      </div>
+      <!-- OUTPUT M2 -->
+      <div style="margin-top:16px;padding:20px 24px;border:1px solid rgba(41,82,227,.2);border-radius:12px;background:rgba(41,82,227,.04)">
+        <div style="font-family:var(--ff-m);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:14px">Cosa porti a casa</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--blue);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">12 workflow operativi</strong> attivi e connessi alla tua clinica via Snoots</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--blue);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">1 workflow personalizzato</strong> costruito da zero con Claude — il metodo che usi per sempre</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--blue);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">Sistema nervoso attivo</strong> — processi che girano anche quando non ci sei</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--blue);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">KPI del sistema nervoso</strong> misurati e verificati in produzione</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--blue);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">Roadmap individuale</strong> per il Modulo 3 — piano agenti e strumenti da costruire</span></div>
+        </div>
+      </div>
+    </div>
+
+   </div>
+  </div>
+</section>
+
+<!-- ══ MODULO 3 ══ -->
+<div class="msep"></div>
+<section class="m3" id="mod3" style="padding:0">
+  <div class="mhero">
+    <div class="mbg"></div><div class="mgrid"></div>
+    <div class="w" style="position:relative">
+      <div class="morb">03</div>
+      <div class="mbadge rv">Modulo 3 — COSTRUIRE · Novembre 2026</div>
+      <div class="mkw rv d1">costruito con Antigravity</div>
+      <h2 class="h1 mttl rv d1">Il Dipartimento R&D della<br><em>clinica intelligente.</em></h2>
+      <p class="mtl rv d2">Impari a pensare come un imprenditore digitale: a trasformare un problema clinico in un prodotto digitale proprietario. Impari come si progetta un agente autonomo, come si costruisce un'app senza scrivere codice, come si crea un asset che aumenta il valore della clinica nel tempo. La sessione più importante del percorso è l'ultima: impari a costruire una strategia a tre anni — non un piano, una traiettoria. Esci con <strong>4 strumenti digitali proprietari</strong> e una visione chiara di dove sarà la tua clinica nel 2027, nel 2028 e nel 2029.</p>
+      <div class="rv d3" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:32px">
+        <a href="#candidatura" class="btn btn-rd btn-lg">Iscriviti in lista d'attesa →</a>
+        <a href="https://drive.google.com/uc?export=download&id=1g75er1jGXo3MEk7tnqmBe_jfDD-lwSAF" style="display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border:2px solid var(--red);border-radius:8px;font-family:var(--ff-m);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);font-weight:700;transition:all .2s;box-shadow:0 0 18px rgba(230,57,70,.3)" onmouseover="this.style.background='#f04050';this.style.boxShadow='0 0 28px rgba(230,57,70,.5)'" onmouseout="this.style.background='var(--red)';this.style.boxShadow='0 0 18px rgba(230,57,70,.3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3v13M7 12l5 5 5-5M3 20h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Scarica il programma del Modulo 3</a>
+        <div class="mdate">📅 Day 1: 12 Novembre · 9:00–17:30 · Day 2: 13 Novembre · 9:00–13:30</div>
+      </div>
+      <div class="mpath rv d3">
+        <div class="mps" data-n="PRIMA"><div class="mps-t">Pre-Training</div></div>
+        <div class="mps" data-n="GIORNO 1"><div class="mps-t">Day 1 — 9:00/17:30</div></div>
+        <div class="mps" data-n="GIORNO 2"><div class="mps-t">Day 2 — 9:00/13:30</div></div>
+        <div class="mps" data-n="PERMANENTE"><div class="mps-t">Alumni Community</div></div>
+      </div>
+    </div>
+  </div>
+  <!-- ══ MFLOW M3 ══ -->
+  <div class="mflow">
+   <div class="w">
+
+    <!-- 2+3 · IN AULA — DAY 1 + DAY 2 accoppiati -->
+    <div class="mflow-phase rv d1">
+      <div class="inaula-pair">
+        <div class="inaula-hd">
+          <div class="inaula-badge-col"><span class="inaula-dot"></span>IN AULA</div>
+          <div class="inaula-center-col">
+            <div class="inaula-dayn">Day 1</div>
+            <div class="inaula-date">12 Novembre 2026 · Milano</div>
+          </div>
+          <div class="inaula-time-col">
+            <div class="inaula-time-val">9:00 – 17:30</div>
+            <div class="inaula-time-dur">8 ore 30 min</div>
+          </div>
+        </div>
+        <div class="inaula-hd">
+          <div class="inaula-badge-col"><span class="inaula-dot"></span>IN AULA</div>
+          <div class="inaula-center-col">
+            <div class="inaula-dayn">Day 2</div>
+            <div class="inaula-date">13 Novembre 2026 · Milano</div>
+          </div>
+          <div class="inaula-time-col">
+            <div class="inaula-time-val">9:00 – 13:30</div>
+            <div class="inaula-time-dur">4 ore 30 min</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+        <div style="padding:18px 20px;border:1px solid rgba(230,57,70,.1);border-radius:10px;background:rgba(230,57,70,.02)">
+          <div style="font-family:var(--ff-m);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px">Day 1 — le sessioni</div>
+          <div style="font-size:.86rem;color:var(--text);line-height:1.7"><span style="color:var(--red);margin-right:6px">·</span>Attivare i 6 agenti autonomi<br><span style="color:var(--red);margin-right:6px">·</span>Attivare i 3 strumenti proprietari<br><span style="color:var(--red);margin-right:6px">·</span>Build live — costruiamo il 4° strumento</div>
+        </div>
+        <div style="padding:18px 20px;border:1px solid rgba(230,57,70,.1);border-radius:10px;background:rgba(230,57,70,.02)">
+          <div style="font-family:var(--ff-m);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px">Day 2 — le sessioni</div>
+          <div style="font-size:.86rem;color:var(--text);line-height:1.7"><span style="color:var(--red);margin-right:6px">·</span>Ecosistema in produzione<br><span style="color:var(--red);margin-right:6px">·</span>Piano strategico triennale<br><span style="color:var(--red);margin-right:6px">·</span>Certificazione Master AI Manager Vet 2026</div>
+        </div>
+      </div>
+      <!-- OUTPUT M3 -->
+      <div style="margin-top:16px;padding:20px 24px;border:1px solid rgba(230,57,70,.2);border-radius:12px;background:rgba(230,57,70,.04)">
+        <div style="font-family:var(--ff-m);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:14px">Cosa porti a casa</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--red);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">Ecosistema completo</strong> Chief AI Genius ONE + n8n + Antigravity in produzione</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--red);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">4 strumenti digitali proprietari</strong> attivi sulla tua clinica — nessuno può replicarli</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--red);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">6 agenti autonomi</strong> configurati e operativi sulla tua clinica</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--red);font-size:1rem;flex-shrink:0">✓</span><span><strong style="color:var(--white)">Piano strategico triennale</strong> con traiettoria 2027–2028–2029 e KPI target</span></div>
+          <div style="display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:var(--text);line-height:1.5"><span style="color:var(--yellow);font-size:1rem;flex-shrink:0">★</span><span><strong style="color:var(--yellow)">Certificazione Master AI Manager Vet 2026</strong> — il primo titolo in Italia</span></div>
+        </div>
+      </div>
+    </div>
+
+   </div>
+  </div>
+</section>
+<div class="msep"></div>
+
+<!-- FOUNDER -->
+<section class="alt" id="founder">
+  <div class="w">
+    <div class="ey rv">Chi costruisce con te</div>
+    <h2 class="h2 rv d1" style="margin-top:14px">Non consulenti che spiegano.<br>Imprenditori che hanno costruito.</h2>
+    <div class="c2" style="margin-top:44px">
+      <div class="fc fc-m rv">
+        <div class="fc-role">Il Veterinario che ha attraversato la trasformazione</div>
+        <div class="fc-av">MS</div>
+        <div class="fc-name">Massimo Serreri</div>
+        <div class="fc-title">Fondatore Brave Vet Business · Veterinario · Imprenditore digitale</div>
+        <div class="fc-q">"Ho costruito l'ecosistema sulla mia clinica prima di insegnarlo. Non parto dalla teoria. Parto da quello che ha funzionato, da quello che non ha funzionato, e dagli errori che ti faccio evitare. Il percorso che vedete è la risposta alla domanda che mi ponevo tre anni fa: dove sarò tra tre anni se continuo così?"</div>
+        <div class="fc-tags"><span class="fc-tag">Veterinario in esercizio</span><span class="fc-tag">Chief AI Genius ONE attivo</span><span class="fc-tag">Case study vivente</span><span class="fc-tag">AI Essentials Tour</span></div>
+      </div>
+      <div class="fc fc-ma rv d2">
+        <div class="fc-role">L'Esperta AI che rende tutto costruibile</div>
+        <div class="fc-av">MD</div>
+        <div class="fc-name">Marta Dessena</div>
+        <div class="fc-title">AI Architect · Co-designer del Master</div>
+        <div class="fc-q">"Non insegno l'AI come concetto. Costruisco il sistema con te, sulla tua clinica, con i tuoi dati reali. Alla fine del percorso non avrai 'imparato qualcosa di interessante'. Avrai un ecosistema in produzione e la competenza per espanderlo autonomamente — per sempre."</div>
+        <div class="fc-tags"><span class="fc-tag">AI applicata al business</span><span class="fc-tag">Architetta ecosistemi</span><span class="fc-tag">n8n + Antigravity</span><span class="fc-tag">Integrazione Snoots</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PER CHI -->
+<section id="perchi">
+  <div class="w">
+    <div class="ey rv">Accesso e selezione</div>
+    <h2 class="h2 rv d1" style="margin-top:14px">Il Master è per chi<br>è già pronto a costruire.</h2>
+    <p class="lead rv d2" style="margin-top:12px">Non è un percorso per chi vuole scoprire cosa può fare l'AI. È per chi ha già deciso. 15 posti. Selezione.</p>
+    <div class="c3" style="margin:44px 0 28px">
+      <div class="pc rv"><div class="pc-ic">🏥</div><div class="pc-t">Il Titolare che vuole scalare senza assumere</div><div class="pc-d">Struttura 300K–2M€. Cerca un sistema che moltiplichi la produttività di quello che ha già.</div></div>
+      <div class="pc rv d1"><div class="pc-ic">🤝</div><div class="pc-t">Il Manager o Direttore Sanitario di corporate</div><div class="pc-d">Gestisce più strutture o coordina team clinici. Ha bisogno di visibilità in tempo reale su KPI, processi e anomalie operative su scala.</div></div>
+      <div class="pc rv d2"><div class="pc-ic">📈</div><div class="pc-t">L'Alumni AI Essentials pronto al passo dopo</div><div class="pc-d">Ha partecipato all'AI Essentials Tour. Vuole costruire l'ecosistema completo, non aggiungere tool scollegati.</div></div>
+    </div>
+    <div class="nonper rv"><div class="nonper-h">Il Master non è per</div><div class="nonper-tags"><span class="nonper-t">Chi vuole un corso teorico</span><span class="nonper-t">Chi cerca tool generici</span><span class="nonper-t">Chi aspetta che l'AI "si stabilizzi"</span><span class="nonper-t">Chi non opera nel settore veterinario</span><span class="nonper-t">Chi non è pronto a investire nella propria struttura</span></div></div>
+  </div>
+</section>
+
+<!-- CALENDARIO -->
+<section id="calendario">
+  <div class="w">
+    <div class="ey rv">Calendario 2026</div>
+    <h2 class="h2 rv d1" style="margin-top:14px">Sei giornate.<br>Un ecosistema completo.</h2>
+    <div class="cal-g">
+      <div class="tl rv d1">
+        <div class="tli t1"><div class="tli-d">11–12 Giugno 2026 · Modulo 1 — USARE</div><div class="tli-t">Chief AI Genius ONE — Il cervello</div><div class="tli-s">11 Giu (9:00–17:30) + 12 Giu (9:00–13:30). Esci con Chief AI Genius ONE configurato, prima competenza AI costruita, referto PDF brandizzato e roadmap verso il Modulo 2.</div></div>
+        <div class="tli" style="padding:10px 0 10px"><div style="font-family:var(--ff-m);font-size:.6rem;color:var(--dim)">↓ Inter-modulare 1→2 · 8 settimane · 5 video + mentor call 1h</div></div>
+        <div class="tli t2"><div class="tli-d">24–25 Settembre 2026 · Modulo 2 — CONNETTERE</div><div class="tli-t">n8n — Il sistema nervoso</div><div class="tli-s">24 Set (9:00–17:30) + 25 Set (9:00–13:30). Esci con 6+ workflow attivi, 1 workflow custom con Claude, sistema nervoso connesso a Chief AI Genius ONE.</div></div>
+        <div class="tli" style="padding:10px 0 10px"><div style="font-family:var(--ff-m);font-size:.6rem;color:var(--dim)">↓ Inter-modulare 2→3 · 8 settimane · 5 video + mentor call 1h</div></div>
+        <div class="tli t3"><div class="tli-d">12–13 Novembre 2026 · Modulo 3 — COSTRUIRE</div><div class="tli-t">Antigravity — Il Dipartimento R&D</div><div class="tli-s">12 Nov (9:00–17:30) + 13 Nov (9:00–13:30). Esci con 6 agenti attivi, 3+1 strumenti proprietari, piano strategico triennale e Certificazione Master.</div></div>
+      </div>
+      <div class="rv d2">
+        <div class="cal-info">
+          <div class="cal-row"><span class="cal-l">Posti disponibili</span><span class="cal-r cr-y">MAX 15</span></div>
+          <div class="cal-row"><span class="cal-l">Giornate totali</span><span class="cal-r cr-w">6 (2 per modulo)</span></div>
+          <div class="cal-row"><span class="cal-l">Day 1 — durata</span><span class="cal-r cr-w">9:00 – 17:30 · 8.5 ore</span></div>
+          <div class="cal-row"><span class="cal-l">Day 2 — durata</span><span class="cal-r cr-w">9:00 – 13:30 · 4.5 ore</span></div>
+          <div class="cal-row"><span class="cal-l">Inter-modulare</span><span class="cal-r cr-w">5 video + 1 mentor call × 2</span></div>
+          <div class="cal-row"><span class="cal-l">Sede</span><span class="cal-r cr-w">Milano · Brave Vet Business</span></div>
+          <div class="cal-row"><span class="cal-l">Struttura</span><span class="cal-r cr-w">Percorso completo · 3 moduli obbligatori</span></div>
+          <div class="cal-row"><span class="cal-l">Alumni AI Essentials</span><span class="cal-r cr-t">Priorità di accesso</span></div>
+          <div class="cal-row"><span class="cal-l">Certificazione</span><span class="cal-r cr-y">Inclusa al termine M3</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="alt rv" id="investimento">
+  <div class="ws">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="ey">Investimento</div>
+      <h2 class="h2" style="margin-top:14px">Un ecosistema che lavora per te.<br>Anche quando non ci sei.</h2>
+    </div>
+    <div class="pr-c" id="candidatura">
+      <div class="pr-ey"><div class="ey">Percorso completo — Modulo 1 + 2 + 3</div></div>
+      <div class="pr-price">€ <span>2.700</span></div>
+      <div class="pr-note">Prezzo Early Access · 15 posti — disponibilità in esaurimento</div>
+      <div class="pr-iva">+ IVA · Deducibile come spesa di formazione professionale</div>
+      <div class="pr-div"></div>
+      <div class="pr-feats">
+        <div class="pf">6 giornate in presenza a Milano</div>
+        <div class="pf">Chief AI Genius ONE sulla tua clinica</div>
+        <div class="pf">12 workflow n8n pronti + build custom</div>
+        <div class="pf">6 agenti autonomi attivati</div>
+        <div class="pf">3+1 strumenti Antigravity proprietari</div>
+        <div class="pf">Video Tutorial on demand + 2 sessioni Mentor Coach</div>
+        <div class="pf">Piano strategico triennale</div>
+        <div class="pf">Alumni Community permanente</div>
+        <div class="pf">Certificazione Master AI Manager Vet 2026</div>
+      </div>
+      <div class="pr-cta">
+        <!-- FORM LISTA D'ATTESA → n8n webhook -->
+        <div id="form-attesa" style="width:100%">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+            <input id="fa-nome" type="text" placeholder="Nome *" style="padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:var(--white);font-family:var(--ff-s);font-size:.88rem;outline:none" onfocus="this.style.borderColor='rgba(255,222,0,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
+            <input id="fa-cognome" type="text" placeholder="Cognome *" style="padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:var(--white);font-family:var(--ff-s);font-size:.88rem;outline:none" onfocus="this.style.borderColor='rgba(255,222,0,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+            <input id="fa-email" type="email" placeholder="Email *" style="padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:var(--white);font-family:var(--ff-s);font-size:.88rem;outline:none" onfocus="this.style.borderColor='rgba(255,222,0,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
+            <input id="fa-telefono" type="tel" placeholder="Telefono *" style="padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:var(--white);font-family:var(--ff-s);font-size:.88rem;outline:none" onfocus="this.style.borderColor='rgba(255,222,0,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+            <input id="fa-clinica" type="text" placeholder="Nome della clinica *" style="padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:var(--white);font-family:var(--ff-s);font-size:.88rem;outline:none" onfocus="this.style.borderColor='rgba(255,222,0,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
+            <select id="fa-ruolo" style="padding:12px 14px;background:#0a1a30;border:1px solid rgba(255,255,255,.15);border-radius:8px;color:var(--white);font-family:var(--ff-s);font-size:.88rem;outline:none;cursor:pointer" onfocus="this.style.borderColor='rgba(255,222,0,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
+              <option value="" disabled selected style="color:#7A93AE">Ruolo *</option>
+              <option value="Titolare">Titolare</option>
+              <option value="Manager / Direttore Sanitario">Manager / Direttore Sanitario</option>
+              <option value="Socio">Socio</option>
+              <option value="Alumni AI Essentials Tour">Alumni AI Essentials Tour</option>
+            </select>
+          </div>
+          <button onclick="inviaListaAttesa()" id="fa-btn" style="width:100%;padding:15px 24px;background:var(--yellow);border:none;border-radius:8px;font-family:var(--ff-m);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 0 24px rgba(255,222,0,.3)" onmouseover="this.style.background='#ffe94d'" onmouseout="this.style.background='var(--yellow)'">Iscriviti in lista d'attesa →</button>
+          <div id="fa-msg" style="display:none;margin-top:12px;padding:12px 16px;border-radius:8px;font-size:.88rem;text-align:center"></div>
+        </div>
+        <script>
+        async function inviaListaAttesa() {
+          const nome = document.getElementById('fa-nome').value.trim();
+          const cognome = document.getElementById('fa-cognome').value.trim();
+          const email = document.getElementById('fa-email').value.trim();
+          const telefono = document.getElementById('fa-telefono').value.trim();
+          const clinica = document.getElementById('fa-clinica').value.trim();
+          const ruolo = document.getElementById('fa-ruolo').value;
+          const msg = document.getElementById('fa-msg');
+          const btn = document.getElementById('fa-btn');
+          if (!nome || !cognome || !email || !telefono || !clinica || !ruolo) {
+            msg.style.display = 'block';
+            msg.style.background = 'rgba(230,57,70,.12)';
+            msg.style.border = '1px solid rgba(230,57,70,.3)';
+            msg.style.color = '#f08090';
+            msg.textContent = 'Compila tutti i campi per procedere.';
+            return;
+          }
+          btn.textContent = 'Invio in corso…';
+          btn.disabled = true;
+          btn.style.opacity = '0.7';
+          try {
+            await fetch('https://bravevetbusiness.app.n8n.cloud/webhook/lista-attesa-master-vet', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({nome, cognome, email, telefono, nome_clinica: clinica, ruolo})
+            });
+            msg.style.display = 'block';
+            msg.style.background = 'rgba(119,177,177,.12)';
+            msg.style.border = '1px solid rgba(119,177,177,.3)';
+            msg.style.color = '#77B1B1';
+            msg.innerHTML = '✓ Sei in lista d\'attesa! Controlla la tua email — ti contatto entro 24-48 ore.';
+            btn.style.display = 'none';
+          } catch(e) {
+            btn.textContent = 'Iscriviti in lista d\'attesa →';
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            msg.style.display = 'block';
+            msg.style.background = 'rgba(230,57,70,.12)';
+            msg.style.border = '1px solid rgba(230,57,70,.3)';
+            msg.style.color = '#f08090';
+            msg.textContent = 'Errore di connessione. Riprova tra qualche secondo.';
+          }
+        }
+        </script>
+        <div class="pr-g">🔒 15 posti. Selezione. La candidatura non è vincolante.</div>
+      </div>
+      <div class="roi">
+        <div class="roi-h">Il calcolo del ROI</div>
+        <div class="roi-t">
+          <strong>2 ore/giorno</strong> risparmiate con il recall automatico e il report del mattino — <strong>12.000€/anno</strong>.<br><br>
+          <strong>8-12% del fatturato</strong> recuperato su clienti inattivi — su 500K€: fino a 60K€/anno.<br><br>
+          <strong>L'investimento si ripaga prima della fine del Modulo 2.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="ws">
+    <div class="ey rv">Domande frequenti</div>
+    <h2 class="h2 rv d1" style="margin-top:14px;margin-bottom:40px">Risposte dirette.</h2>
+    <div class="faq-i"><button class="faq-q" onclick="faq(this)">Non sono tecnico/a — riuscirò davvero a costruire questi sistemi?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai"><strong>Non stai imparando a programmare.</strong> Stai imparando a descrivere il tuo problema con precisione. Il sistema costruisce la soluzione. Nessun partecipante tocca codice. Il blocco non è mai tecnico — è mentale. Lo superiamo nel Day 1.</div></div></div>
+    <div class="faq-i"><button class="faq-q" onclick="faq(this)">Sono alumni dell'AI Essentials Tour — il Master è il passo giusto?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai"><strong>Il Master è stato progettato esattamente per chi ha fatto l'AI Essentials.</strong> Hai già visto il potenziale. Adesso costruisci l'ecosistema. Gli alumni hanno priorità di accesso e prezzo Early Access bloccato. Il Modulo 1 parte da dove l'AI Essentials si è fermato.</div></div></div>
+    <div class="faq-i"><button class="faq-q" onclick="faq(this)">Posso fare solo il Modulo 1 e decidere dopo?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai">No. <strong>Il Super Master si fa completo o non si fa.</strong> I tre moduli non sono opzioni — sono i tre livelli di un unico ecosistema. Il cervello senza il sistema nervoso non agisce. Il sistema nervoso senza il Dipartimento R&D non produce asset. Chi si iscrive si impegna sul percorso intero: è la condizione per costruire qualcosa che dura.</div></div></div>
+    <div class="faq-i"><button class="faq-q" onclick="faq(this)">La mia clinica non usa Snoots — il percorso funziona lo stesso?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai"><strong>Snoots è il gestionale su cui è costruito l'intero ecosistema</strong> — l'integrazione è nativa e i 12 workflow sono pre-configurati. Se la tua clinica non usa ancora Snoots, nessun problema: per tutta la durata del percorso ti viene messo a disposizione un ambiente staging dedicato direttamente da Snoots. Lavori su dati reali, configuri tutto, e al termine hai già l'ecosistema pronto per andare in produzione.</div></div></div>
+    <div class="faq-i"><button class="faq-q" onclick="faq(this)">Cosa succede se l'AI evolve e il sistema diventa obsoleto?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai">Il Master insegna <strong>principi e metodi</strong>, non tool specifici. L'architettura (cervello → sistema nervoso → R&D) è indipendente dai tool. Per i partecipanti: aggiorniamo il percorso ogni volta che lo stack evolve in modo rilevante. L'Alumni Community garantisce aggiornamenti permanenti.</div></div></div>
+    <div class="faq-i"><button class="faq-q" onclick="faq(this)">I due giorni per modulo sono entrambi obbligatori?<span class="faq-ic">+</span></button><div class="faq-a"><div class="faq-ai"><strong>Entrambi i giorni sono parte integrante del modulo.</strong> Il Day 1 costruisce, il Day 2 consolida e consegna gli output tangibili. Partecipare solo al Day 1 significa uscire senza gli output e senza la configurazione completa. In caso di impedimento, il live streaming garantisce la stessa esperienza.</div></div></div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="ftcta rv">
+  <div class="w">
+    <div class="ey" style="margin-bottom:16px">Costruisci la tua clinica intelligente</div>
+    <h2 class="ftcta-t">La clinica intelligente<br>parte da <span>adesso.</span></h2>
+    <p class="ftcta-s">15 posti. Sei giornate. Tre moduli per costruire il cervello, il sistema nervoso e il Dipartimento R&D della tua clinica intelligente.</p>
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px">
+      <a href="#candidatura" class="btn btn-y btn-lg">Iscriviti in lista d'attesa →</a>
+      <a href="https://drive.google.com/uc?export=download&id=1UucDaB86tOV_zj4wCJfxic6dEvE8D1mk" style="display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border:2px solid var(--yellow);border-radius:8px;font-family:var(--ff-m);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);background:var(--yellow);font-weight:700;transition:all .2s;box-shadow:0 0 20px rgba(255,222,0,.3)" onmouseover="this.style.background='#ffe94d';this.style.boxShadow='0 0 32px rgba(255,222,0,.55)'" onmouseout="this.style.background='var(--yellow)';this.style.boxShadow='0 0 20px rgba(255,222,0,.3)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3v13M7 12l5 5 5-5M3 20h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Scarica il corso completo</a>
+    </div>
+    <div class="ftcta-l">Brave Vet Business · Super Master AI Manager Vet 2026 · Milano · 15 posti · Giugno · Settembre · Novembre 2026</div>
+  </div>
+</section>
+
+<footer><div class="w"><div class="foot-in">
+  <div class="foot-br">BRAVE VET <span>BUSINESS</span></div>
+  <div class="foot-cp">© 2026 Brave Vet Business · AI Authority · <strong style="color:var(--yellow)">Super</strong> Master AI Manager Vet 2026</div>
+</div></div></footer>
+
+<!-- STICKY BAR -->
+<div class="sbar" id="sbar">
+  <div class="sbar-t"><strong>Super Master AI Manager Vet 2026</strong> — Chief AI Genius ONE · n8n · Antigravity · 15 posti</div>
+  <div class="sbar-r">
+    <span class="sbar-sp">⬤ 15 posti disponibili</span>
+    <a href="#candidatura" class="btn btn-y" style="padding:9px 20px;font-size:.8rem">Iscriviti →</a>
+  </div>
+</div>
+
+<script>
+const nav=document.getElementById('nav'),sbar=document.getElementById('sbar');
+document.body.classList.add('js-ready');
+window.addEventListener('scroll',()=>{const y=window.scrollY;nav.classList.toggle('s',y>40);sbar.classList.toggle('on',y>600)});
+if(window.self!==window.top){
+  document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'));
+}else{
+  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target)}})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+}
+function faq(b){
+  const i=b.closest('.faq-i'),o=i.classList.contains('open');
+  document.querySelectorAll('.faq-i.open').forEach(el=>el.classList.remove('open'));
+  if(!o) i.classList.add('open');
+}
+</script>
+</body>
+</html>
