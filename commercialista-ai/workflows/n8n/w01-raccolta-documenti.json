@@ -1,0 +1,266 @@
+{
+  "name": "W01 · Raccolta documenti — solleciti automatici",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1-5"
+            }
+          ]
+        }
+      },
+      "id": "trigger-0800",
+      "name": "Ogni mattina 08:00 (lun-ven)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [-620, 300]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "REPLACE_BASE_ID",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "scadenze",
+          "mode": "name"
+        },
+        "filterByFormula": "AND({stato} != 'pagato', {stato} != 'non_dovuto', {da_confermare} = 0, DATETIME_DIFF({data_scadenza}, TODAY(), 'days') >= 0, DATETIME_DIFF({data_scadenza}, TODAY(), 'days') <= 10)",
+        "options": {}
+      },
+      "id": "read-scadenze",
+      "name": "Scadenze entro 10 giorni",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [-400, 300],
+      "notes": "Sostituire REPLACE_BASE_ID e collegare le credenziali Airtable."
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "REPLACE_BASE_ID",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "documenti_attesi",
+          "mode": "name"
+        },
+        "filterByFormula": "OR({stato} = 'atteso', {stato} = 'incompleto')",
+        "options": {}
+      },
+      "id": "read-documenti",
+      "name": "Documenti mancanti",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [-400, 480]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "REPLACE_BASE_ID",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "clienti",
+          "mode": "name"
+        },
+        "filterByFormula": "{stato} = 'attivo'",
+        "options": {}
+      },
+      "id": "read-clienti",
+      "name": "Anagrafica clienti",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [-400, 660]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Raggruppa per cliente: UN SOLO messaggio per cliente al giorno,\n// anche se mancano documenti per piu' scadenze diverse.\n\nconst scadenze = $('Scadenze entro 10 giorni').all().map(i => i.json);\nconst documenti = $('Documenti mancanti').all().map(i => i.json);\nconst clienti   = $('Anagrafica clienti').all().map(i => i.json);\n\nconst oggi = new Date();\nconst giorniA = (d) => Math.ceil((new Date(d) - oggi) / 86400000);\nconst oggiISO = oggi.toISOString().slice(0, 10);\n\nconst byId = Object.fromEntries(clienti.map(c => [c.client_id, c]));\nconst out = [];\n\nfor (const cliente of clienti) {\n  // GUARDRAIL 1: clienti con invii bloccati -> solo promemoria interno\n  if (cliente.blocco_invii_automatici) continue;\n\n  const docs = documenti.filter(d => d.client_id === cliente.client_id && d.obbligatorio);\n  if (docs.length === 0) continue;\n\n  // GUARDRAIL 2: mai due solleciti allo stesso cliente nello stesso giorno\n  const sollecitatoOggi = docs.some(d => d.data_ultimo_sollecito === oggiISO);\n  if (sollecitatoOggi) continue;\n\n  const scad = scadenze.filter(s => s.client_id === cliente.client_id);\n  if (scad.length === 0) continue;\n\n  const prossima = scad.sort((a, b) => new Date(a.data_scadenza) - new Date(b.data_scadenza))[0];\n  const giorni = giorniA(prossima.data_scadenza);\n\n  // Catena di escalation: T-10 / T-5 / T-2. Clienti poco puntuali partono prima.\n  const anticipo = (cliente.puntualita_score || 3) <= 2 ? 15 : 10;\n  const tappe = [anticipo, 5, 2];\n  if (!tappe.includes(giorni)) continue;\n\n  const livello = giorni >= 10 ? 1 : (giorni === 5 ? 2 : 3);\n\n  out.push({\n    json: {\n      client_id: cliente.client_id,\n      ragione_sociale: cliente.ragione_sociale,\n      referente_nome: cliente.referente_nome,\n      referente_email: cliente.referente_email,\n      canale: cliente.canale_preferito || 'email',\n      tono: cliente.tono_comunicazione || 'cordiale',\n      livello_sollecito: livello,\n      giorni_alla_scadenza: giorni,\n      adempimento: prossima.descrizione,\n      periodo: prossima.periodo_riferimento,\n      data_scadenza: prossima.data_scadenza,\n      documenti_mancanti: docs.map(d => ({ doc_id: d.doc_id, tipo: d.tipo, periodo: d.periodo })),\n      // GUARDRAIL 3: dal terzo sollecito serve approvazione umana\n      richiede_approvazione: livello >= 3\n    }\n  });\n}\n\nreturn out;"
+      },
+      "id": "raggruppa",
+      "name": "Raggruppa per cliente + guardrail",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-140, 440]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Compone l'email a partire da templates/email/01-sollecito-documenti.md.\n// REGOLA: nessun segnaposto puo' restare vuoto. Se un dato manca, l'email\n// non si genera e si apre un'anomalia.\n\nconst etichette = {\n  estratto_conto:  'estratto conto bancario',\n  fatture_attive:  'fatture emesse',\n  fatture_passive: 'fatture di acquisto',\n  corrispettivi:   'corrispettivi',\n  prima_nota:      'prima nota',\n  contratti:       'contratti',\n  f24_pagato:      'ricevuta di pagamento F24',\n  altro:           'altra documentazione'\n};\n\nconst apertura = {\n  1: (n) => `Buongiorno ${n},`,\n  2: (n) => `Buongiorno ${n},`,\n  3: (n) => `Buongiorno ${n},`\n};\n\nconst corpo = {\n  1: 'per completare la lavorazione ci mancano ancora questi documenti:',\n  2: 'torniamo sulla richiesta: mancano ancora questi documenti e la scadenza si avvicina.',\n  3: 'la scadenza e\\' fra pochi giorni e ci mancano ancora questi documenti. Ci servono per procedere in tempo.'\n};\n\nconst out = [];\n\nfor (const item of $input.all()) {\n  const d = item.json;\n  const mancanti = (d.documenti_mancanti || [])\n    .map(x => `• ${etichette[x.tipo] || x.tipo} — periodo ${x.periodo}`)\n    .join('\\n');\n\n  const campiObbligatori = [d.referente_nome, d.referente_email, d.adempimento, d.data_scadenza];\n  if (campiObbligatori.some(v => !v) || !mancanti) {\n    out.push({ json: { ...d, errore: 'dati_mancanti', invia: false } });\n    continue;\n  }\n\n  const data = new Date(d.data_scadenza).toLocaleDateString('it-IT');\n  const oggetto = `${d.ragione_sociale} · documenti mancanti per ${d.adempimento} · scadenza ${data}`;\n\n  const testo = [\n    apertura[d.livello_sollecito](d.referente_nome),\n    '',\n    corpo[d.livello_sollecito],\n    '',\n    mancanti,\n    '',\n    `Servono per: ${d.adempimento} — periodo ${d.periodo}, in scadenza il ${data} (fra ${d.giorni_alla_scadenza} giorni).`,\n    '',\n    'Puoi rispondere direttamente a questa email allegando i file, oppure caricarli qui: REPLACE_LINK_UPLOAD',\n    '',\n    'Grazie,',\n    'Studio'\n  ].join('\\n');\n\n  out.push({ json: { ...d, oggetto, testo, invia: true } });\n}\n\nreturn out;"
+      },
+      "id": "componi",
+      "name": "Componi email con dati",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [80, 440]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.invia }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "c2",
+              "leftValue": "={{ $json.richiede_approvazione }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-invio",
+      "name": "Invio diretto o coda approvazione?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [300, 440]
+    },
+    {
+      "parameters": {
+        "fromEmail": "studio@REPLACE_DOMINIO.it",
+        "toEmail": "={{ $json.referente_email }}",
+        "subject": "={{ $json.oggetto }}",
+        "emailFormat": "text",
+        "text": "={{ $json.testo }}",
+        "options": {}
+      },
+      "id": "invia",
+      "name": "Invia sollecito",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [540, 340]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "REPLACE_BASE_ID",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "comunicazioni",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "client_id": "={{ $json.client_id }}",
+            "tipo": "01-sollecito-documenti",
+            "canale": "email",
+            "generata_da": "agent:A3",
+            "approvata_da": "auto:livello<3",
+            "contenuto": "={{ $json.testo }}",
+            "esito": "inviata"
+          }
+        },
+        "options": {}
+      },
+      "id": "log-inviata",
+      "name": "Registra in comunicazioni",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [760, 340]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "REPLACE_BASE_ID",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "comunicazioni",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "client_id": "={{ $json.client_id }}",
+            "tipo": "01-sollecito-documenti",
+            "canale": "={{ $json.canale }}",
+            "generata_da": "agent:A3",
+            "approvata_da": "",
+            "contenuto": "={{ $json.testo }}",
+            "esito": "in_coda"
+          }
+        },
+        "options": {}
+      },
+      "id": "coda",
+      "name": "Coda approvazione (3° sollecito)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [540, 560],
+      "notes": "approvata_da vuoto = non inviabile. Il rilascio e' un'azione umana."
+    }
+  ],
+  "connections": {
+    "Ogni mattina 08:00 (lun-ven)": {
+      "main": [[{ "node": "Scadenze entro 10 giorni", "type": "main", "index": 0 }]]
+    },
+    "Scadenze entro 10 giorni": {
+      "main": [[{ "node": "Documenti mancanti", "type": "main", "index": 0 }]]
+    },
+    "Documenti mancanti": {
+      "main": [[{ "node": "Anagrafica clienti", "type": "main", "index": 0 }]]
+    },
+    "Anagrafica clienti": {
+      "main": [[{ "node": "Raggruppa per cliente + guardrail", "type": "main", "index": 0 }]]
+    },
+    "Raggruppa per cliente + guardrail": {
+      "main": [[{ "node": "Componi email con dati", "type": "main", "index": 0 }]]
+    },
+    "Componi email con dati": {
+      "main": [[{ "node": "Invio diretto o coda approvazione?", "type": "main", "index": 0 }]]
+    },
+    "Invio diretto o coda approvazione?": {
+      "main": [
+        [{ "node": "Invia sollecito", "type": "main", "index": 0 }],
+        [{ "node": "Coda approvazione (3° sollecito)", "type": "main", "index": 0 }]
+      ]
+    },
+    "Invia sollecito": {
+      "main": [[{ "node": "Registra in comunicazioni", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "descrizione": "Sollecito documenti a T-10/T-5/T-2. Un solo messaggio per cliente al giorno. Dal terzo sollecito serve approvazione umana. Sostituire i segnaposto REPLACE_* e collegare le credenziali prima dell'attivazione."
+  },
+  "tags": ["commercialista-ai", "W01"]
+}

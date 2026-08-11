@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#021024">
+<meta name="robots" content="noindex">
+<title>Assistente Commercialista AI — Console dimostrativa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#021024;--panel:#07182f;--panel2:#0b2140;
+  --blue:#2952E3;--teal:#77B1B1;--red:#E63946;--yellow:#FFDE00;--green:#3FBF7F;
+  --text:#E8EDF5;--dim:#7A93AE;--border:rgba(255,255,255,.08);
+  --ff-b:'DM Sans',system-ui,-apple-system,sans-serif;
+  --ff-m:'DM Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+body{background:var(--navy);color:var(--text);font-family:var(--ff-b);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+header{border-bottom:1px solid var(--border);padding:34px 0 26px;margin-bottom:6px}
+.ey{font-family:var(--ff-m);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow)}
+h1{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:600;letter-spacing:-.02em;margin:10px 0 12px;line-height:1.15}
+.sub{color:var(--dim);max-width:640px;font-size:.96rem}
+.warn{margin-top:20px;padding:11px 16px;background:rgba(255,222,0,.06);border-left:3px solid var(--yellow);border-radius:0 6px 6px 0;font-size:.83rem;color:#d9c98a}
+
+nav.tabs{display:flex;gap:4px;overflow-x:auto;padding:18px 0 0;border-bottom:1px solid var(--border);margin-bottom:30px;-webkit-overflow-scrolling:touch}
+.tab{font-family:var(--ff-m);font-size:.73rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);padding:10px 15px;border-radius:5px 5px 0 0;border-bottom:2px solid transparent;white-space:nowrap;transition:.18s}
+.tab:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.tab[aria-selected="true"]{color:var(--yellow);border-bottom-color:var(--yellow)}
+
+section[role=tabpanel]{display:none;animation:fade .3s both}
+section[role=tabpanel].on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+h2{font-size:1.15rem;font-weight:600;margin:0 0 4px;letter-spacing:-.01em}
+h2 + .note{color:var(--dim);font-size:.86rem;margin-bottom:18px}
+h3{font-family:var(--ff-m);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:26px 0 12px}
+
+.card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:12px}
+.card.crit{border-left:3px solid var(--red)}
+.card.warnc{border-left:3px solid var(--yellow)}
+.card.ok{border-left:3px solid var(--green)}
+.card.info{border-left:3px solid var(--blue)}
+.card-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.card-t{font-weight:600;font-size:.95rem}
+.card-x{font-family:var(--ff-m);font-size:.74rem;color:var(--dim);letter-spacing:.04em}
+.card-b{font-size:.88rem;color:var(--dim)}
+.card-b b{color:var(--text);font-weight:500}
+.card-act{margin-top:9px;font-size:.8rem;color:var(--teal)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:14px}
+.kpi{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:15px 17px}
+.kpi-n{font-family:var(--ff-m);font-size:1.6rem;font-weight:500;letter-spacing:-.02em}
+.kpi-l{font-size:.76rem;color:var(--dim);margin-top:2px}
+.y{color:var(--yellow)}.r{color:var(--red)}.g{color:var(--green)}.t{color:var(--teal)}.bl{color:var(--blue)}
+
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+.tscroll{overflow-x:auto;border:1px solid var(--border);border-radius:10px;background:var(--panel)}
+th{text-align:left;font-family:var(--ff-m);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:400;padding:12px 14px;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.num{font-family:var(--ff-m);white-space:nowrap}
+.pill{display:inline-block;font-family:var(--ff-m);font-size:.66rem;letter-spacing:.06em;padding:3px 8px;border-radius:20px;white-space:nowrap}
+.p-ok{background:rgba(63,191,127,.13);color:var(--green)}
+.p-w{background:rgba(255,222,0,.11);color:var(--yellow)}
+.p-r{background:rgba(230,57,70,.13);color:var(--red)}
+.p-b{background:rgba(41,82,227,.16);color:#7f9bff}
+.p-n{background:rgba(255,255,255,.06);color:var(--dim)}
+
+.mail{background:var(--panel2);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px}
+.mail-h{padding:13px 18px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02)}
+.mail-h .from{font-size:.75rem;color:var(--dim);font-family:var(--ff-m)}
+.mail-h .subj{font-weight:600;font-size:.92rem;margin-top:3px}
+.mail-b{padding:17px 18px;font-family:var(--ff-m);font-size:.79rem;line-height:1.75;white-space:pre-wrap;color:#cfdcea}
+.mail-b mark{background:rgba(255,222,0,.16);color:var(--yellow);padding:1px 3px;border-radius:3px}
+.mail-f{padding:11px 18px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:.76rem;color:var(--dim)}
+
+.agent{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:10px}
+.agent-id{font-family:var(--ff-m);font-size:.72rem;letter-spacing:.06em;padding:5px 9px;border-radius:5px;background:rgba(41,82,227,.14);color:#7f9bff;white-space:nowrap}
+.agent-n{font-weight:600;font-size:.94rem}
+.agent-q{font-size:.8rem;color:var(--yellow);font-style:italic;margin:2px 0 6px}
+.agent-d{font-size:.86rem;color:var(--dim)}
+
+ol.steps{list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 16px 40px;border-left:1px solid var(--border);margin-left:12px}
+ol.steps li:last-child{border-left-color:transparent;padding-bottom:0}
+ol.steps li::before{content:counter(s);position:absolute;left:-13px;top:-2px;width:26px;height:26px;border-radius:50%;background:var(--panel2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--ff-m);font-size:.72rem;color:var(--yellow)}
+ol.steps b{display:block;font-weight:600;font-size:.9rem;margin-bottom:2px}
+ol.steps span{font-size:.85rem;color:var(--dim)}
+
+footer{border-top:1px solid var(--border);margin-top:48px;padding:26px 0 44px;font-size:.8rem;color:var(--dim)}
+footer a{color:var(--teal)}
+@media(max-width:640px){
+  .card-top{flex-direction:column;gap:2px}
+  .agent{grid-template-columns:1fr}
+  .agent-id{justify-self:start}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <div class="ey">Sistema agenti · studio commercialista</div>
+  <h1>Assistente Commercialista AI</h1>
+  <p class="sub">Console dimostrativa. Nove agenti che presidiano il ciclo amministrativo dello studio e rispondono con automazioni, workflow ed email popolate di dati — non con consigli generici.</p>
+  <div class="warn"><b>Dati fittizi.</b> Clienti, importi, scadenze e anomalie di questa pagina sono inventati a scopo dimostrativo. Il calendario fiscale va riverificato ogni anno; la sezione AI Act è guida operativa, non parere legale.</div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-p="briefing">Briefing 07:45</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="scadenze">Scadenze</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="email">Email con dati</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="pagamenti">Pagamenti</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="agenti">Agenti</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="aiact">AI Act</button>
+</nav>
+
+<!-- ============ BRIEFING ============ -->
+<section role="tabpanel" id="briefing" class="on">
+  <h2>La prima cosa che vedi arrivando in ufficio</h2>
+  <p class="note">Una pagina, ogni mattina alle 07:45. Se serve più di una pagina, il sistema è tarato male.</p>
+
+  <div class="grid">
+    <div class="kpi"><div class="kpi-n y">14</div><div class="kpi-l">scadenze entro 10 giorni</div></div>
+    <div class="kpi"><div class="kpi-n r">3</div><div class="kpi-l">bloccanti</div></div>
+    <div class="kpi"><div class="kpi-n t">12</div><div class="kpi-l">email da approvare</div></div>
+    <div class="kpi"><div class="kpi-n">2</div><div class="kpi-l">telefonate in coda</div></div>
+  </div>
+
+  <h3>Bloccanti</h3>
+  <div class="card crit">
+    <div class="card-top"><span class="card-t">Rossi Srl — estratto conto luglio mancante</span><span class="card-x">9 gg · 2 solleciti</span></div>
+    <div class="card-b">Serve per la <b>liquidazione IVA 2° trimestre</b>, scadenza <b>20/08</b>. Ultimo sollecito il 06/08, nessuna risposta.</div>
+    <div class="card-act">→ A3 ha preparato il terzo sollecito (richiede approvazione) · telefonata suggerita oggi</div>
+  </div>
+  <div class="card crit">
+    <div class="card-top"><span class="card-t">Bianchi &amp; C. — IVA luglio fuori scala</span><span class="card-x">+314% vs media</span></div>
+    <div class="card-b">IVA a debito <b>€ 18.200</b> contro una media semestrale di <b>€ 4.400</b>. Ipotesi: fatture nn. 142 e 143 duplicate, stesso importo e stessa controparte.</div>
+    <div class="card-act">→ A4 ha sospeso la liquidazione in attesa di verifica</div>
+  </div>
+  <div class="card crit">
+    <div class="card-top"><span class="card-t">Verdi Snc — F24 giugno mai confermato</span><span class="card-x">56 gg · € 2.140</span></div>
+    <div class="card-b">Inviato il 12/06, nessuna conferma di pagamento e nessun riscontro. <b>Ravvedimento calcolato come proposta: € 2.211,60.</b></div>
+    <div class="card-act">→ decisione al professionista · nessun messaggio inviato al cliente</div>
+  </div>
+
+  <h3>Arrivato nella notte</h3>
+  <div class="card info">
+    <div class="card-b"><b>2 PEC dall'Agenzia</b> — 1 avviso bonario (Neri Srl, € 1.310) · 1 ricevuta di trasmissione.<br><b>2 risposte clienti</b> con documenti: Gialli Srl (fatture luglio), Neri Srl (estratto conto). Catene di sollecito chiuse automaticamente.</div>
+  </div>
+
+  <h3>Da approvare</h3>
+  <div class="card ok">
+    <div class="card-b"><b>8</b> solleciti documenti · <b>3</b> riepiloghi liquidazione IVA · <b>1</b> sollecito parcella a 60 giorni.</div>
+    <div class="card-act">→ coda unica, approvazione in blocco dopo controllo</div>
+  </div>
+
+  <h3>Da chiamare</h3>
+  <div class="card warnc">
+    <div class="card-b"><b>Verdi Snc</b> — F24 non pagato, 56 giorni. Cliente dal 2016, mai un ritardo prima di marzo.<br><b>Gialli Srl</b> — parcella a 90 giorni, 3 email senza risposta. In ritardo anche sull'F24 di luglio: <b>segnale di crisi, non problema di credito</b>.</div>
+  </div>
+</section>
+
+<!-- ============ SCADENZE ============ -->
+<section role="tabpanel" id="scadenze">
+  <h2>Scadenzario dello studio</h2>
+  <p class="note">Non il calendario fiscale generico: l'incrocio tra calendario, profilo del cliente e stato di lavorazione.</p>
+
+  <h3>Vista studio · prossimi 15 giorni</h3>
+  <div class="tscroll">
+  <table>
+    <thead><tr><th>Data</th><th>Adempimento</th><th>Clienti</th><th>Stato lavorazione</th></tr></thead>
+    <tbody>
+      <tr><td class="num">20/08</td><td>IVA 2° trimestre</td><td class="num">14</td><td><span class="pill p-ok">9 pronti</span> <span class="pill p-b">3 in lavorazione</span> <span class="pill p-r">2 senza documenti</span></td></tr>
+      <tr><td class="num">20/08</td><td>Ritenute luglio</td><td class="num">31</td><td><span class="pill p-ok">28 pronti</span> <span class="pill p-r">3 senza documenti</span></td></tr>
+      <tr><td class="num">20/08</td><td>Contributi INPS artigiani</td><td class="num">9</td><td><span class="pill p-ok">9 pronti</span></td></tr>
+      <tr><td class="num">25/08</td><td>INTRASTAT luglio</td><td class="num">2</td><td><span class="pill p-w">1 pronto</span> <span class="pill p-r">1 documenti mancanti</span></td></tr>
+      <tr><td class="num">31/08</td><td>Registrazioni agosto (interna)</td><td class="num">47</td><td><span class="pill p-b">in corso</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:10px">La scadenza del 16/08 è slittata al 20/08: sospensione feriale dei versamenti (1–20 agosto).</p>
+
+  <h3>Vista cliente · Rossi Srl</h3>
+  <div class="tscroll">
+  <table>
+    <thead><tr><th>Data</th><th>Adempimento</th><th>Importo</th><th>Stato</th><th>Nota</th></tr></thead>
+    <tbody>
+      <tr><td class="num">20/08</td><td>IVA 2° trimestre 2026</td><td class="num">€ 4.312,00</td><td><span class="pill p-ok">F24 inviato</span></td><td>attesa conferma pagamento</td></tr>
+      <tr><td class="num">20/08</td><td>Ritenute luglio</td><td class="num">€ 890,00</td><td><span class="pill p-ok">F24 inviato</span></td><td>—</td></tr>
+      <tr><td class="num">25/08</td><td>INTRASTAT luglio</td><td class="num">—</td><td><span class="pill p-r">documenti mancanti</span></td><td>manca elenco cessioni UE</td></tr>
+      <tr><td class="num">30/09</td><td>LIPE 2° trimestre</td><td class="num">nessun versamento</td><td><span class="pill p-n">da avviare</span></td><td>—</td></tr>
+      <tr><td class="num">30/11</td><td>2° acconto imposte</td><td class="num">da definire</td><td><span class="pill p-n">da avviare</span></td><td><span class="pill p-w">da confermare</span> proroghe anno in corso</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:10px">Le voci <span class="pill p-w">da confermare</span> non generano email al cliente: restano alert interni finché la data non è verificata.</p>
+</section>
+
+<!-- ============ EMAIL ============ -->
+<section role="tabpanel" id="email">
+  <h2>Email con i dati dentro</h2>
+  <p class="note">La differenza tra un template e questo sistema è che il template va riempito — e riempirlo è il lavoro. In <mark>giallo</mark> i dati iniettati dalle tabelle.</p>
+
+  <div class="mail">
+    <div class="mail-h">
+      <div class="from">A3 · Esattore → mario.rossi@rossisrl.it · generata 08:00</div>
+      <div class="subj">Rossi Srl · documenti mancanti per IVA 2° trimestre · scadenza 20/08/2026</div>
+    </div>
+    <div class="mail-b">Buongiorno <mark>Mario</mark>,
+
+per completare la lavorazione di <mark>IVA 2° trimestre</mark> (<mark>apr–giu 2026</mark>) ci mancano ancora questi documenti:
+
+<mark>• estratto conto bancario — periodo luglio 2026
+• elenco cessioni UE — periodo luglio 2026</mark>
+
+La scadenza è il <mark>20/08/2026</mark>, fra <mark>9</mark> giorni.
+
+Puoi rispondere a questa email allegando i file, oppure caricarli qui:
+studio.it/upload/rossi-srl
+
+Grazie,
+Studio</div>
+    <div class="mail-f"><span class="pill p-ok">inviata in automatico</span> 1° sollecito · registrata in <span style="font-family:var(--ff-m)">comunicazioni</span></div>
+  </div>
+
+  <div class="mail">
+    <div class="mail-h">
+      <div class="from">A4 · Liquidatore → mario.rossi@rossisrl.it · in coda di approvazione</div>
+      <div class="subj">Rossi Srl · IVA 2° trimestre · € 4.312,00 da versare entro il 20/08/2026</div>
+    </div>
+    <div class="mail-b">Buongiorno <mark>Mario</mark>,
+
+abbiamo chiuso la liquidazione IVA di <mark>2° trimestre 2026</mark>.
+
+  IVA su vendite                <mark>€ 12.480,00</mark>
+  IVA su acquisti               <mark>€  8.168,00</mark>
+  Credito periodo precedente             <mark>—</mark>
+  ─────────────────────────────────────────────
+  IVA A DEBITO                  <mark>€  4.312,00</mark>
+
+Il versamento va effettuato entro il <mark>20/08/2026</mark> con modello F24,
+codice tributo <mark>6007</mark>. Trovi l'F24 già compilato in allegato.
+
+Rispetto al <mark>1° trimestre</mark> (<mark>€ 3.980,00</mark>) la variazione è <mark>+8,3%</mark>;
+rispetto allo stesso periodo dell'anno scorso <mark>+4,8%</mark>.
+
+Per qualsiasi chiarimento siamo qui.
+
+<mark>Dott.ssa Elena Fabbri</mark>
+Studio</div>
+    <div class="mail-f"><span class="pill p-w">richiede approvazione</span> contiene importi · nessun invio senza <span style="font-family:var(--ff-m)">approvata_da</span></div>
+  </div>
+
+  <div class="mail">
+    <div class="mail-h">
+      <div class="from">A6 · Cassiere → amministrazione@giallisrl.it · <b>bloccata</b></div>
+      <div class="subj">Gialli Srl · partite aperte · € 6.120,00</div>
+    </div>
+    <div class="mail-b">⛔ <mark>Invio bloccato dal sistema.</mark>
+
+Motivo: il cliente risulta in ritardo <mark>sia sulle parcelle (90 gg)</mark> sia
+<mark>sull'F24 di luglio (26 gg)</mark>.
+
+La correlazione dei due ritardi sullo stesso cliente è un segnale di crisi,
+non un problema di credito: la posizione è stata portata al titolare
+insieme alla scheda cliente, e la catena di solleciti è sospesa.</div>
+    <div class="mail-f"><span class="pill p-r">non inviata</span> decisione umana richiesta</div>
+  </div>
+</section>
+
+<!-- ============ PAGAMENTI ============ -->
+<section role="tabpanel" id="pagamenti">
+  <h2>Pagamenti — due binari</h2>
+  <p class="note">Nello studio "pagamenti" significa due cose diverse, entrambe critiche: quello che il cliente deve all'Erario, e quello che deve allo studio.</p>
+
+  <h3>Verso l'Erario · presidio F24</h3>
+  <div class="grid">
+    <div class="kpi"><div class="kpi-n">54</div><div class="kpi-l">F24 inviati questo mese</div></div>
+    <div class="kpi"><div class="kpi-n g">49</div><div class="kpi-l">confermati pagati</div></div>
+    <div class="kpi"><div class="kpi-n y">4</div><div class="kpi-l">in attesa di riscontro</div></div>
+    <div class="kpi"><div class="kpi-n r">1</div><div class="kpi-l">non pagato oltre 30 gg</div></div>
+  </div>
+  <div class="card info">
+    <div class="card-b">Nessun sollecito automatico al cliente su un mancato versamento: a volte il pagamento c'è ed è il riscontro a mancare. L'alert va allo studio, con importo, giorni e storico. <b>Il ravvedimento è sempre una proposta, mai un'esecuzione.</b></div>
+  </div>
+
+  <h3>Verso lo studio · scaduto per fasce</h3>
+  <div class="tscroll">
+  <table>
+    <thead><tr><th>Fascia</th><th>Importo</th><th>Clienti</th><th>Azione del sistema</th></tr></thead>
+    <tbody>
+      <tr><td>0–30 giorni</td><td class="num">€ 18.200</td><td class="num">11</td><td><span class="pill p-n">fisiologico</span> nessuna azione</td></tr>
+      <tr><td>31–60 giorni</td><td class="num">€ 14.900</td><td class="num">6</td><td><span class="pill p-w">2 mai sollecitati</span> email 2 in coda</td></tr>
+      <tr><td>61–90 giorni</td><td class="num">€ 9.100</td><td class="num">3</td><td><span class="pill p-b">telefonata preparata</span> con scheda cliente</td></tr>
+      <tr><td>oltre 90 giorni</td><td class="num">€ 6.120</td><td class="num">2</td><td><span class="pill p-r">nessuna automazione</span> decisione titolare</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:10px">DSO medio 47 giorni (trimestre precedente: 52). Oltre i 45 giorni il sistema non scrive più email: se un cliente non ha risposto a due, la terza non serve — serve una voce.</p>
+</section>
+
+<!-- ============ AGENTI ============ -->
+<section role="tabpanel" id="agenti">
+  <h2>Nove agenti, un mestiere ciascuno</h2>
+  <p class="note">Ogni agente ha un innesco, un input dichiarato, un output verificabile e una regola di escalation all'umano.</p>
+
+  <div class="agent"><span class="agent-id">A0</span><div><div class="agent-n">Orchestratore · Studio Desk</div><div class="agent-d">Punto d'ingresso unico. Capisce la richiesta, chiama gli agenti giusti e restituisce una sola risposta. Nessuno deve ricordarsi i nomi degli agenti.</div></div></div>
+
+  <div class="agent"><span class="agent-id">A1</span><div><div class="agent-n">Radar · briefing del mattino</div><div class="agent-q">"Qual è la prima cosa che fai appena arrivi in ufficio?"</div><div class="agent-d">Sostituisce i 60–90 minuti spesi a ricostruire lo stato del mondo con una pagina alle 07:45. Legge, non scrive.</div></div></div>
+
+  <div class="agent"><span class="agent-id">A2</span><div><div class="agent-n">Scadenziere</div><div class="agent-q">"Scadenze"</div><div class="agent-d">Incrocia calendario fiscale, profilo del cliente e stato di lavorazione. Applica slittamenti e sospensione feriale. Nessuna data dedotta a memoria.</div></div></div>
+
+  <div class="agent"><span class="agent-id">A3</span><div><div class="agent-n">Esattore documenti</div><div class="agent-q">"Quale roba proprio non vorresti fare?"</div><div class="agent-d">Rincorre i clienti a T-10 / T-5 / T-2 con l'elenco puntuale di cosa manca. Un solo messaggio al giorno per cliente. Dal terzo sollecito decide una persona.</div></div></div>
+
+  <div class="agent"><span class="agent-id">A4</span><div><div class="agent-n">Liquidatore · ciclo mensile</div><div class="agent-q">"Cosa fai ogni mese?"</div><div class="agent-d">IVA, LIPE, F24, ritenute. Non ricalcola l'imposta: la legge dal gestionale, la confronta con lo storico, blocca gli scostamenti oltre soglia e traccia dove sono i 140 clienti.</div></div></div>
+
+  <div class="agent"><span class="agent-id">A5</span><div><div class="agent-n">Voce dello Studio</div><div class="agent-q">"Cosa invii ai tuoi clienti?"</div><div class="agent-d">Sei famiglie di email generate con i dati dentro. Nessun segnaposto vuoto: se un dato manca, l'email non nasce e si apre un'anomalia.</div></div></div>
+
+  <div class="agent"><span class="agent-id">A6</span><div><div class="agent-n">Cassiere · parcelle e incassi</div><div class="agent-q">"Pagamenti"</div><div class="agent-d">Riconcilia gli incassi (automatico solo sulla corrispondenza esatta), tiene lo scaduto per fasce, propone i solleciti e si ferma dove comincia la decisione umana.</div></div></div>
+
+  <div class="agent"><span class="agent-id">A7</span><div><div class="agent-n">Sentinella · controlli</div><div class="agent-d">Batteria notturna: quadrature, numerazioni, aliquote, scostamenti, cassa negativa. Segnala con i numeri e l'ipotesi più probabile. Non corregge mai.</div></div></div>
+
+  <div class="agent"><span class="agent-id">A8</span><div><div class="agent-n">Garante · AI Act e privacy</div><div class="agent-q">"AI Act — come muoversi per essere in regola"</div><div class="agent-d">Tiene il registro degli usi AI, fa il triage delle nuove richieste, e verifica che nessun output sia uscito senza approvazione umana.</div></div></div>
+</section>
+
+<!-- ============ AI ACT ============ -->
+<section role="tabpanel" id="aiact">
+  <h2>AI Act — come muoversi per essere in regola</h2>
+  <p class="note">Sintesi operativa. La versione completa è in <span style="font-family:var(--ff-m)">docs/04-ai-act.md</span>. Non è un parere legale.</p>
+
+  <div class="card warnc">
+    <div class="card-b"><b>La cosa da capire per prima:</b> lo studio è <b>deployer</b> (utilizzatore), non fornitore. Gli obblighi pesanti stanno dall'altra parte — a meno che lo studio non metta il proprio marchio su un sistema di AI o lo rivenda ai clienti come proprio. In quel caso cambia cappello, e va valutato prima.</div>
+  </div>
+
+  <h3>Cosa è già esigibile oggi</h3>
+  <div class="card crit">
+    <div class="card-top"><span class="card-t">Alfabetizzazione AI (art. 4)</span><span class="card-x">dal 2 febbraio 2025</span></div>
+    <div class="card-b">Chi utilizza sistemi di AI deve garantire un livello sufficiente di competenza al proprio personale. Serve poterlo <b>dimostrare</b>: mezza giornata di formazione documentata, vademecum di 2 pagine, registro firme, aggiornamento annuale.</div>
+  </div>
+  <div class="card crit">
+    <div class="card-top"><span class="card-t">Pratiche vietate</span><span class="card-x">dal 2 febbraio 2025</span></div>
+    <div class="card-b">Le due che possono toccare uno studio: <b>riconoscimento delle emozioni sul luogo di lavoro</b> (attenzione ai software di monitoraggio dei collaboratori) e <b>social scoring</b>.</div>
+  </div>
+  <div class="card info">
+    <div class="card-top"><span class="card-t">Trasparenza (art. 50) e alto rischio</span><span class="card-x">2 agosto 2026</span></div>
+    <div class="card-b">Chatbot esposti ai clienti e contenuti sintetici vanno dichiarati. L'ipotesi di alto rischio più concreta per uno studio è l'<b>uso di AI per selezionare il personale</b> — la strada semplice è non farlo finché non si è attrezzati. <b>Il quadro europeo è in movimento: verificare lo stato delle scadenze prima di pianificare.</b></div>
+  </div>
+  <div class="card info">
+    <div class="card-top"><span class="card-t">Norma italiana · L. 132/2025</span><span class="card-x">professioni intellettuali</span></div>
+    <div class="card-b">L'AI resta strumentale: la prestazione è del professionista. E il cliente va <b>informato in modo chiaro</b> dell'uso di sistemi di AI nell'incarico → una clausola nella lettera d'incarico, testo pronto nella documentazione.</div>
+  </div>
+
+  <h3>Il piano, in ordine</h3>
+  <ol class="steps">
+    <li><b>Censire gli usi reali</b><span>Compresi quelli informali: l'account personale del collaboratore è il rischio numero uno.</span></li>
+    <li><b>Classificare ogni uso</b><span>Minimo · limitato · alto · vietato, con una riga di motivazione. Chi salta questo passaggio non ha nulla su cui poggiare il resto.</span></li>
+    <li><b>Formazione art. 4</b><span>Già esigibile, ed è il cantiere che costa meno.</span></li>
+    <li><b>Policy interna</b><span>Strumenti ammessi, dati vietati, obbligo di verifica, divieto di account personali.</span></li>
+    <li><b>Contratti fornitori</b><span>DPA firmati, training sui dati disattivato e verificato, sede di elaborazione.</span></li>
+    <li><b>Informativa e lettera d'incarico</b><span>Clausola sull'uso di AI + informativa privacy aggiornata.</span></li>
+    <li><b>Presidio umano formalizzato</b><span>Per ogni processo: chi controlla cosa, prima di quale rilascio.</span></li>
+    <li><b>Log e tracciabilità</b><span>Chi ha approvato cosa, e quando. È già nel modello dati del sistema.</span></li>
+  </ol>
+
+  <div class="card ok" style="margin-top:20px">
+    <div class="card-b"><b>Il principio che regge tutto.</b> Il presidio richiesto dalla norma e il presidio richiesto dalla qualità del lavoro sono lo stesso presidio: una persona competente che guarda l'output prima che esca, e una traccia di chi l'ha guardato. Uno studio che ha costruito bene le automazioni è già a metà della conformità.</div>
+  </div>
+</section>
+
+<footer>
+  Sistema agenti · Assistente Commercialista AI — documentazione completa nella cartella <span style="font-family:var(--ff-m)">commercialista-ai/</span> del repository.<br>
+  Dati dimostrativi. Calendario fiscale da riverificare annualmente. Contenuti AI Act a scopo operativo, non sostitutivi di un parere legale.
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var tabs = document.querySelectorAll('.tab');
+  var panels = document.querySelectorAll('section[role=tabpanel]');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+      panels.forEach(function(p){ p.classList.toggle('on', p.id === tab.dataset.p); });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

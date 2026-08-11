@@ -1,0 +1,214 @@
+{
+  "name": "W06 · Riconciliazione incassi parcelle",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 * * 1-5"
+            }
+          ]
+        }
+      },
+      "id": "trigger-0700",
+      "name": "Ogni mattina 07:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [-620, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "REPLACE_URL_MOVIMENTI_BANCARI",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "dal",
+              "value": "={{ $now.minus(1, 'days').toFormat('yyyy-MM-dd') }}"
+            },
+            {
+              "name": "al",
+              "value": "={{ $now.toFormat('yyyy-MM-dd') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "movimenti",
+      "name": "Movimenti bancari in entrata",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [-400, 300],
+      "notes": "API della banca / aggregatore (PSD2) oppure lettura di un CSV depositato in cartella. Attesi: data, importo, causale, ordinante, iban_ordinante."
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "REPLACE_BASE_ID",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "parcelle",
+          "mode": "name"
+        },
+        "filterByFormula": "OR({stato} = 'emessa', {stato} = 'incassata_parziale', {stato} = 'insoluta')",
+        "options": {}
+      },
+      "id": "parcelle-aperte",
+      "name": "Parcelle aperte",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [-400, 480]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Abbinamento incassi <-> parcelle.\n// PRINCIPIO: e' automatico solo cio' che e' certo. Tutto il resto e' una PROPOSTA.\n// Un abbinamento sbagliato e' silenzioso e si paga mesi dopo.\n\nconst movimenti = $('Movimenti bancari in entrata').all().map(i => i.json).filter(m => Number(m.importo) > 0);\nconst parcelle  = $('Parcelle aperte').all().map(i => i.json);\n\nconst cent = (v) => Math.round(Number(v) * 100);\nconst norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');\n\nconst residuo = (p) => cent(p.totale) - cent(p.incassato || 0);\n\nconst risultati = [];\n\nfor (const mov of movimenti) {\n  const imp = cent(mov.importo);\n  const causale = norm(mov.causale);\n\n  // 1. importo esatto + numero fattura nella causale -> AUTOMATICO\n  const perNumero = parcelle.filter(p => residuo(p) === imp && causale.includes(norm(p.numero)));\n  if (perNumero.length === 1) {\n    risultati.push({ json: { esito: 'automatico', criterio: 'numero_fattura', movimento: mov, parcella_id: perNumero[0].parcella_id, client_id: perNumero[0].client_id, importo: mov.importo } });\n    continue;\n  }\n\n  // 2. importo esatto + IBAN ordinante gia' noto per quel cliente -> AUTOMATICO\n  const perIban = parcelle.filter(p => residuo(p) === imp && p.iban_noto && norm(p.iban_noto) === norm(mov.iban_ordinante));\n  if (perIban.length === 1) {\n    risultati.push({ json: { esito: 'automatico', criterio: 'iban_noto', movimento: mov, parcella_id: perIban[0].parcella_id, client_id: perIban[0].client_id, importo: mov.importo } });\n    continue;\n  }\n\n  // 3. somma di piu' parcelle dello stesso cliente -> PROPOSTA\n  const perCliente = {};\n  for (const p of parcelle) {\n    (perCliente[p.client_id] = perCliente[p.client_id] || []).push(p);\n  }\n  let proposta = null;\n  for (const [clientId, lista] of Object.entries(perCliente)) {\n    const somma = lista.reduce((t, p) => t + residuo(p), 0);\n    if (somma === imp && lista.length > 1) {\n      proposta = { client_id: clientId, parcelle: lista.map(p => p.parcella_id) };\n      break;\n    }\n  }\n  if (proposta) {\n    risultati.push({ json: { esito: 'proposta', criterio: 'somma_parcelle', movimento: mov, ...proposta, importo: mov.importo } });\n    continue;\n  }\n\n  // 4. importo parziale su una sola parcella plausibile -> PROPOSTA\n  const parziali = parcelle.filter(p => residuo(p) > imp && causale.includes(norm(p.numero)));\n  if (parziali.length === 1) {\n    risultati.push({ json: { esito: 'proposta', criterio: 'incasso_parziale', movimento: mov, parcella_id: parziali[0].parcella_id, client_id: parziali[0].client_id, importo: mov.importo } });\n    continue;\n  }\n\n  // 5. nessuna corrispondenza -> CODA MANUALE\n  risultati.push({ json: { esito: 'manuale', criterio: 'nessuna_corrispondenza', movimento: mov, importo: mov.importo } });\n}\n\nreturn risultati;"
+      },
+      "id": "abbina",
+      "name": "Abbina incassi a parcelle",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-140, 380]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "version": 2 },
+                "conditions": [
+                  {
+                    "id": "r1",
+                    "leftValue": "={{ $json.esito }}",
+                    "rightValue": "automatico",
+                    "operator": { "type": "string", "operation": "equals" }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "automatico"
+            },
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "version": 2 },
+                "conditions": [
+                  {
+                    "id": "r2",
+                    "leftValue": "={{ $json.esito }}",
+                    "rightValue": "proposta",
+                    "operator": { "type": "string", "operation": "equals" }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "proposta"
+            },
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "version": 2 },
+                "conditions": [
+                  {
+                    "id": "r3",
+                    "leftValue": "={{ $json.esito }}",
+                    "rightValue": "manuale",
+                    "operator": { "type": "string", "operation": "equals" }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "manuale"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "switch",
+      "name": "Automatico / Proposta / Manuale",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [120, 380]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": { "__rl": true, "value": "REPLACE_BASE_ID", "mode": "id" },
+        "table": { "__rl": true, "value": "parcelle", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "parcella_id": "={{ $json.parcella_id }}",
+            "stato": "incassata",
+            "incassato": "={{ $json.importo }}",
+            "updated_by": "agent:A6"
+          }
+        },
+        "options": {}
+      },
+      "id": "aggiorna",
+      "name": "Aggiorna parcella (incassata)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [380, 200]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": { "__rl": true, "value": "REPLACE_BASE_ID", "mode": "id" },
+        "table": { "__rl": true, "value": "anomalie", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "client_id": "={{ $json.client_id || '' }}",
+            "tipo": "dato_incoerente",
+            "gravita": "info",
+            "descrizione": "={{ 'Incasso da abbinare — ' + $json.criterio + ' — importo ' + $json.importo + ' — causale: ' + ($json.movimento.causale || '') }}",
+            "rilevata_da": "agent:A6",
+            "stato": "aperta"
+          }
+        },
+        "options": {}
+      },
+      "id": "coda-manuale",
+      "name": "Coda riconciliazione umana",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [380, 480],
+      "notes": "Proposte e non-corrispondenze finiscono qui. Nessuna scrittura automatica su parcelle non certe."
+    }
+  ],
+  "connections": {
+    "Ogni mattina 07:00": {
+      "main": [[{ "node": "Movimenti bancari in entrata", "type": "main", "index": 0 }]]
+    },
+    "Movimenti bancari in entrata": {
+      "main": [[{ "node": "Parcelle aperte", "type": "main", "index": 0 }]]
+    },
+    "Parcelle aperte": {
+      "main": [[{ "node": "Abbina incassi a parcelle", "type": "main", "index": 0 }]]
+    },
+    "Abbina incassi a parcelle": {
+      "main": [[{ "node": "Automatico / Proposta / Manuale", "type": "main", "index": 0 }]]
+    },
+    "Automatico / Proposta / Manuale": {
+      "main": [
+        [{ "node": "Aggiorna parcella (incassata)", "type": "main", "index": 0 }],
+        [{ "node": "Coda riconciliazione umana", "type": "main", "index": 0 }],
+        [{ "node": "Coda riconciliazione umana", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "descrizione": "Riconciliazione giornaliera degli incassi. Automatico solo su corrispondenza esatta (numero fattura o IBAN noto); tutto il resto va in coda umana. Sostituire i segnaposto REPLACE_* prima dell'attivazione."
+  },
+  "tags": ["commercialista-ai", "W06"]
+}
