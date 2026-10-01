@@ -1,0 +1,32 @@
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "/dermatologia"
+  to = "/dermatologia.html"
+  status = 200
+[[redirects]]
+  from = "/medicina-interna"
+  to = "/medicina-interna.html"
+  status = 200
+[[redirects]]
+  from = "/vlog"
+  to = "/vlog.html"
+  status = 200
+[[redirects]]
+  from = "/contatti"
+  to = "/#contatti"
+  status = 301

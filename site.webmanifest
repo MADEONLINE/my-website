@@ -1,0 +1,9 @@
+{
+  "name": "Dr.ssa Elisa Marzaro · Veterinaria",
+  "short_name": "Elisa Marzaro",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#061A33",
+  "theme_color": "#061A33",
+  "icons": [{ "src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
